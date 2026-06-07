@@ -48,10 +48,12 @@ export default function Home() {
 
       {/* Hero */}
       <section className="space-y-6">
-        <Image src="/logo-mark.png" alt="Open Campus Advisor" width={120} height={120} className="rounded-2xl"/>
-        <h1 className="text-5xl font-bold leading-tight tracking-tight">
-          Open Campus Advisor
-        </h1>
+        <div className="flex items-center gap-5">
+          <Image src="/logo-mark.png" alt="Open Campus Advisor" width={120} height={120} className="rounded-2xl"/>
+          <h1 className="text-5xl font-bold leading-tight tracking-tight">
+            Open Campus Advisor
+          </h1>
+        </div>
         <p className="text-2xl text-gray-400 font-light leading-snug">
           AI advising for any university.
         </p>
