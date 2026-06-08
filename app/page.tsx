@@ -50,17 +50,17 @@ const EXAMPLES = [
 const CAPABILITIES = [
   {
     title: "Course catalog",
-    description: "Search any school's live course catalog by topic, department, or instructor. Get prerequisites, enrollment data, gen-ed requirements, and first-year seminars — current as of today.",
+    description: "Search any college or university's live course catalog by topic, department, or instructor. Get prerequisites, enrollment data, gen-ed requirements, and first-year seminars — current as of today.",
     examples: ["What can I take as a freshman in the CS department?", "Which courses fulfill the quantitative reasoning requirement?"],
   },
   {
     title: "Faculty & research",
-    description: "Find professors by research topic, see their active NIH grants, publications, and lab opportunities. Compare research strength across all five schools simultaneously.",
+    description: "Find professors by research topic, see their active NIH grants, publications, and lab opportunities. Compare research strength across all five institutions simultaneously.",
     examples: ["Who at Stanford studies large language models?", "Which BIOL faculty have active NIH grants?"],
   },
   {
     title: "Academic paths",
-    description: "Navigate from a career goal backwards to majors, courses, and professors. Or start from a school and see where each major leads — salary ranges, job outlook, and typical employers included.",
+    description: "Navigate from a career goal backwards to majors, courses, and professors. Or start from a college or university and see where each major leads — salary ranges, job outlook, and typical employers included.",
     examples: ["What major and courses lead to climate policy work?", "Compare CS programs at MIT and Stanford by curriculum and faculty."],
   },
 ];
@@ -74,7 +74,7 @@ const HOW_IT_WORKS = [
   {
     step: "02",
     title: "The graph connects",
-    description: "Open Campus Advisor traverses the academic graph in real time — live course data, faculty research, degree requirements, and career outcomes across all five schools.",
+    description: "Open Campus Advisor traverses the academic graph in real time — live course data, faculty research, degree requirements, and career outcomes across all five institutions.",
   },
   {
     step: "03",
@@ -109,7 +109,7 @@ export default function Home() {
           Academic navigation for students.
         </p>
         <p className="text-xl text-gray-500 max-w-xl leading-relaxed">
-          From career goal to course sequence — across five universities — through natural conversation with Claude or ChatGPT.
+          From career goal to course sequence — across five colleges and universities — through natural conversation with Claude or ChatGPT.
         </p>
         <div className="flex items-center gap-2 flex-wrap">
           {["Wesleyan", "Columbia", "MIT", "Stanford", "Yale"].map(school => (
@@ -128,7 +128,7 @@ export default function Home() {
             href="mailto:tolga@breaklinedigital.com"
             className="text-gray-500 text-sm hover:text-gray-900 transition-colors"
           >
-            Bring it to your school →
+            Bring it to your campus →
           </Link>
         </div>
       </section>
@@ -185,14 +185,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* For universities */}
+      {/* For institutions */}
       <section className="space-y-6">
-        <h2 className="text-2xl font-semibold">For universities</h2>
+        <h2 className="text-2xl font-semibold">For colleges & universities</h2>
         <p className="text-gray-500 max-w-xl">
-          Any university with a public course catalog can be connected. Students get live course search, faculty research, degree requirements, and career path navigation — all through Claude or ChatGPT, with no new app to install.
+          Any college or university with a public course catalog can be connected. Students get live course search, faculty research, degree requirements, and career path navigation — all through Claude or ChatGPT, with no new app to install.
         </p>
         <p className="text-gray-500 max-w-xl">
-          Every query is logged anonymously to PostHog. Universities get a dashboard showing what their students are actually exploring — trending topics, popular departments, common career paths — updated in real time.
+          Every query is logged anonymously. Your institution gets a dashboard showing what students are actually exploring — trending topics, popular departments, common career paths — updated in real time.
         </p>
         <Link
           href="mailto:tolga@breaklinedigital.com"
