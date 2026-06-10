@@ -85,7 +85,7 @@ const HOW_IT_WORKS = [
 
 export default function Home() {
   return (
-    <main className="max-w-4xl mx-auto px-6 pt-2 pb-6 space-y-24">
+    <main className="max-w-4xl mx-auto px-6 pt-0 pb-6 space-y-24">
 
       {/* Hero */}
       <section className="space-y-4">
