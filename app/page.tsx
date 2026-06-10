@@ -195,19 +195,19 @@ export default function Home() {
           </div>
 
           {/* API / Platform integration */}
-          <div className="border border-gray-900 rounded-xl p-6 space-y-3 bg-gray-900 text-white">
+          <div className="border border-gray-100 rounded-xl p-6 space-y-3">
             <p className="text-xs font-medium uppercase tracking-widest text-gray-400">For platforms</p>
-            <p className="text-sm text-gray-300 leading-relaxed">
+            <p className="text-sm text-gray-500 leading-relaxed">
               If your platform already owns the student relationship — Scoir, Naviance, College Board, a counseling tool — you don&apos;t need to build the data layer. Ours is live across 34 institutions.
             </p>
-            <p className="text-sm text-gray-300 leading-relaxed">
+            <p className="text-sm text-gray-500 leading-relaxed">
               Three endpoints. Your product, our data.
             </p>
             <div className="pt-1 space-y-2">
-              <pre className="text-xs text-gray-400 leading-relaxed">POST /api/v1/batch/path<br />x-institution-id: your-platform</pre>
+              <pre className="bg-gray-50 text-gray-600 text-xs px-3 py-2 rounded-lg leading-relaxed">POST /api/v1/batch/path{"\n"}x-institution-id: your-platform</pre>
               <Link
                 href="/integrate"
-                className="inline-block text-sm text-white underline hover:no-underline"
+                className="inline-block text-sm text-gray-900 underline hover:no-underline"
               >
                 See integration docs →
               </Link>

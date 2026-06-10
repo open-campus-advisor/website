@@ -5,15 +5,15 @@ import "./globals.css";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Open Campus Advisor — AI advisor for any university",
-  description: "Open source AI advisor for any university. Get live course info, faculty research, and academic guidance through Claude or ChatGPT.",
+  title: "Open Campus Advisor — Academic navigation for students",
+  description: "From career goal to course sequence — across 34 colleges and universities — through natural conversation with Claude or ChatGPT.",
   icons: {
-    icon: "/favicon-32.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/logo-mark.png",
+    apple: "/logo-mark.png",
   },
   openGraph: {
     title: "Open Campus Advisor",
-    description: "Open source AI advisor for any university — academics, research, and career through natural conversation.",
+    description: "From career goal to course sequence — across 34 colleges and universities — through natural conversation with Claude or ChatGPT.",
     url: "https://opencampusadvisor.org",
     siteName: "Open Campus Advisor",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
