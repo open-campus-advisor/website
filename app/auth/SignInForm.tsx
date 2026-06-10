@@ -21,8 +21,10 @@ export function SignInForm({ callbackUrl }: { callbackUrl: string }) {
 
   async function handleEmail(e: React.FormEvent) {
     e.preventDefault()
+    // Validate email before passing to nodemailer — mitigation for GHSA-c7w3-x93f-qmm8
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return
     setLoading(true)
-    await signIn("nodemailer", { email, callbackUrl, redirect: false })
+    await signIn("nodemailer", { email: email.trim(), callbackUrl, redirect: false })
     setSent(true)
     setLoading(false)
   }
