@@ -98,7 +98,7 @@ export default function Home() {
 
       {/* Hero */}
       <section className="space-y-4">
-        <div className="flex justify-start -mb-2">
+        <div className="flex justify-center -mb-2">
           <Image src="/logo-rectangle.png" alt="Open Campus Advisor" width={480} height={240} className="rounded-2xl"/>
         </div>
         <p className="text-2xl text-gray-400 font-light leading-snug">
