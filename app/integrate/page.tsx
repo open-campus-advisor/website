@@ -106,13 +106,12 @@ export default function Integrate() {
           >
             Request a technical evaluation →
           </Link>
-          <a
-            href="https://api.opencampusadvisor.org/openapi-chatgpt.json"
-            target="_blank"
+          <Link
+            href="/docs"
             className="text-gray-500 text-sm hover:text-gray-900 transition-colors"
           >
-            View API specification →
-          </a>
+            Browse API reference →
+          </Link>
         </div>
       </section>
 
@@ -257,6 +256,7 @@ export default function Integrate() {
       <footer className="border-t border-gray-100 pt-8 flex items-center justify-between text-sm text-gray-400">
         <Link href="/" className="hover:text-gray-600 transition-colors">← Open Campus Advisor</Link>
         <div className="flex gap-6">
+          <Link href="/docs" className="hover:text-gray-600 transition-colors">API Docs</Link>
           <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
           <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
         </div>
