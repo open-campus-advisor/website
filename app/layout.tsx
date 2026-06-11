@@ -6,14 +6,14 @@ const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Open Campus Advisor — Academic navigation for students",
-  description: "From career goal to course sequence — across 34 colleges and universities — through natural conversation with Claude or ChatGPT.",
+  description: "From career goal to course sequence — across 37 colleges and universities — through natural conversation with Claude or ChatGPT.",
   icons: {
     icon: "/logo-mark.png",
     apple: "/logo-mark.png",
   },
   openGraph: {
     title: "Open Campus Advisor",
-    description: "From career goal to course sequence — across 34 colleges and universities — through natural conversation with Claude or ChatGPT.",
+    description: "From career goal to course sequence — across 37 colleges and universities — through natural conversation with Claude or ChatGPT.",
     url: "https://opencampusadvisor.org",
     siteName: "Open Campus Advisor",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
