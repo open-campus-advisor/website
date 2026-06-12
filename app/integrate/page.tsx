@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Integration — REST API & MCP Agentic Tools | Open Campus Advisor",
   description:
-    "Two integration surfaces: a REST API for platform partners (Scoir, Naviance, College Board) and an MCP server for agentic AI workflows in Claude Desktop and Claude Code. 17 tools, session-scoped student context, live data across 37 US colleges.",
+    "Two integration surfaces: a REST API for platforms that already serve students, and an MCP server for agentic AI workflows in Claude Desktop and Claude Code. 17 tools, session-scoped student context, live data across 37 US colleges.",
   alternates: { canonical: "https://opencampusadvisor.org/integrate" },
 };
 
