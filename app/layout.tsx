@@ -7,10 +7,10 @@ const geist = Geist({ subsets: ["latin"] });
 const TITLE = "Open Campus Advisor — AI Academic Advisor for College Students";
 const DESCRIPTION =
   "The AI academic advisor that knows your campus. Live course catalogs, faculty research, degree requirements, and career outcomes across 37 top US colleges — through natural conversation with Claude or ChatGPT.";
-const URL = "https://opencampusadvisor.org";
+const SITE_URL = "https://opencampusadvisor.org";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(URL),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: TITLE,
     template: "%s — Open Campus Advisor",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     "NIH grants faculty",
     "college major requirements",
   ],
-  authors: [{ name: "Open Campus Advisor", url: URL }],
+  authors: [{ name: "Open Campus Advisor", url: SITE_URL }],
   creator: "Open Campus Advisor",
   publisher: "Open Campus Advisor",
   category: "Education",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: URL,
+    url: SITE_URL,
     siteName: "Open Campus Advisor",
     title: TITLE,
     description: DESCRIPTION,
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: URL,
+    canonical: SITE_URL,
   },
   verification: {
     // Add Google Search Console verification token here when available
@@ -75,19 +75,19 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": `${URL}/#organization`,
+      "@id": `${SITE_URL}/#organization`,
       name: "Open Campus Advisor",
-      url: URL,
-      logo: { "@type": "ImageObject", url: `${URL}/logo-rectangle.png` },
+      url: SITE_URL,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/logo-rectangle.png` },
       contactPoint: { "@type": "ContactPoint", email: "hello@opencampusadvisor.org", contactType: "customer support" },
       sameAs: ["https://github.com/open-campus-advisor"],
     },
     {
       "@type": "WebSite",
-      "@id": `${URL}/#website`,
-      url: URL,
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
       name: "Open Campus Advisor",
-      publisher: { "@id": `${URL}/#organization` },
+      publisher: { "@id": `${SITE_URL}/#organization` },
       potentialAction: {
         "@type": "SearchAction",
         target: { "@type": "EntryPoint", urlTemplate: `https://api.opencampusadvisor.org/api/v1/search?query={search_term_string}` },
@@ -96,13 +96,13 @@ const jsonLd = {
     },
     {
       "@type": "SoftwareApplication",
-      "@id": `${URL}/#app`,
+      "@id": `${SITE_URL}/#app`,
       name: "Open Campus Advisor",
       applicationCategory: "EducationalApplication",
       operatingSystem: "Web, iOS (via ChatGPT), Android (via ChatGPT), macOS (via Claude)",
       description: DESCRIPTION,
-      url: URL,
-      publisher: { "@id": `${URL}/#organization` },
+      url: SITE_URL,
+      publisher: { "@id": `${SITE_URL}/#organization` },
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       featureList: [
         "Live course catalog search across 37 universities",
