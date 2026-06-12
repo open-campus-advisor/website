@@ -108,7 +108,7 @@ export default function Integrate() {
             Request a technical evaluation →
           </Link>
           <a
-            href="https://api.opencampusadvisor.org/openapi-chatgpt.json"
+            href="https://api.opencampusadvisor.org/openapi.json"
             target="_blank"
             className="text-gray-500 text-sm hover:text-gray-900 transition-colors"
           >
