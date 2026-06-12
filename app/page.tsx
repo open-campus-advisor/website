@@ -120,10 +120,10 @@ export default function Home() {
           </p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
-          {["Wesleyan", "Columbia", "MIT", "Stanford", "Yale", "Brown", "Cornell", "Penn", "Dartmouth", "Notre Dame", "Illinois", "Harvey Mudd", "Vassar", "GWU", "Bates", "Williams", "Middlebury", "Bryn Mawr", "Colorado College", "Gonzaga", "Baylor", "Ole Miss", "CSUN", "CSU Chico", "CSU Dominguez Hills", "Rose-Hulman", "Seton Hall", "Salve Regina", "Niagara", "Eastern", "Immaculata", "Point Loma", "Swarthmore", "Oberlin", "Macalester", "Georgetown Law", "Lafayette"].map(school => (
+          {["Wesleyan", "Columbia", "MIT", "Stanford", "Yale", "Brown", "Cornell", "Penn", "Dartmouth", "Notre Dame", "Illinois", "Harvey Mudd", "Vassar", "GWU", "Bates", "Williams", "Middlebury", "Bryn Mawr", "Gonzaga", "Baylor", "Ole Miss", "CSUN", "Swarthmore", "Macalester", "Georgetown Law", "Lafayette", "Davidson", "Grinnell", "Allegheny", "Pomona", "Claremont McKenna", "Scripps", "Pitzer", "Morehouse", "JMU", "Radford", "Longwood", "Furman", "Hope", "Calvin", "Berry", "Belmont", "Merrimack", "Endicott", "CSU East Bay", "CSU Channel Islands", "Sonoma State", "Goucher", "Providence", "USF"].map(school => (
             <span key={school} className="text-xs font-medium bg-gray-100 text-gray-500 px-2.5 py-1 rounded-full">{school}</span>
           ))}
-          <span className="text-xs text-gray-400 px-1">+ more coming</span>
+          <span className="text-xs text-gray-400 px-1">+ 51 more</span>
         </div>
         <div className="flex items-center gap-4 pt-2">
           <Link

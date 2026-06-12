@@ -4,17 +4,17 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Integration — REST API & MCP Agentic Tools | Open Campus Advisor",
   description:
-    "Two integration surfaces: a REST API for platforms that already serve students, and an MCP server for agentic AI workflows in Claude Desktop and Claude Code. 17 tools, session-scoped student context, live data across 37 US colleges.",
+    "Two integration surfaces: a REST API for platforms that already serve students, and an MCP server for agentic AI workflows in Claude Desktop and Claude Code. 17 tools, session-scoped student context, live data across 101 US colleges.",
   alternates: { canonical: "https://opencampusadvisor.org/integrate" },
 };
 
 const SCHOOLS = [
-  "Columbia", "Cornell", "Dartmouth", "Brown", "Penn",
-  "MIT", "Stanford", "Yale", "Notre Dame", "Illinois",
-  "Wesleyan", "Williams", "Middlebury", "Bates", "Vassar",
-  "Bryn Mawr", "Colorado College", "Gonzaga", "Baylor", "Ole Miss",
-  "Harvey Mudd", "Lafayette", "CSUN", "Swarthmore", "Macalester",
-  "+ 12 more",
+  "Columbia", "Cornell", "MIT", "Stanford", "Yale", "Brown", "Penn", "Dartmouth",
+  "Notre Dame", "Illinois", "Harvey Mudd", "Wesleyan", "Williams", "Middlebury",
+  "Bates", "Vassar", "Swarthmore", "Macalester", "Grinnell", "Davidson",
+  "Pomona", "CMC", "Scripps", "Pitzer", "Morehouse", "Furman", "Hope",
+  "Berry", "Belmont", "JMU", "Radford", "Longwood",
+  "+ 69 more",
 ];
 
 const DATA_LAYERS = [
@@ -95,7 +95,7 @@ export default function Integrate() {
           <span className="text-gray-400 font-light">REST API and MCP server.</span>
         </h1>
         <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
-          Two integration surfaces. A <strong className="text-gray-700">REST API</strong> for platforms that already serve students — providing live course catalogs, faculty research, degree requirements, and career outcomes across 37 institutions. An <strong className="text-gray-700">MCP server</strong> for agentic AI workflows in Claude Desktop and Claude Code, with 17 tools, session-scoped student context, and full PostHog observability.
+          Two integration surfaces. A <strong className="text-gray-700">REST API</strong> for platforms that already serve students — providing live course catalogs, faculty research, degree requirements, and career outcomes across 101 institutions. An <strong className="text-gray-700">MCP server</strong> for agentic AI workflows in Claude Desktop and Claude Code, with 17 tools, session-scoped student context, and full PostHog observability.
         </p>
         <p className="text-lg text-gray-500 max-w-2xl leading-relaxed">
           Your product surface. Your student relationship. Our data infrastructure.
@@ -139,7 +139,7 @@ export default function Integrate() {
           ))}
         </div>
         <div>
-          <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-3">37 live institutions</p>
+          <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-3">101 live institutions</p>
           <div className="flex flex-wrap gap-2">
             {SCHOOLS.map((s) => (
               <span key={s} className={`text-xs px-2.5 py-1 rounded-full ${s.startsWith("+") ? "text-gray-400" : "bg-gray-100 text-gray-600 font-medium"}`}>
@@ -266,7 +266,7 @@ get_student_context()
             <p className="text-xs font-medium uppercase tracking-widest text-gray-400">Provided by Open Campus Advisor</p>
             <ul className="space-y-2 text-sm text-gray-700">
               {[
-                "Live course catalog data across 37 institutions",
+                "Live course catalog data across 101 institutions",
                 "Faculty research profiles and NIH grant records",
                 "Curated degree requirements and career outcome data",
                 "Data sourcing, parsing, maintenance, and uptime",
