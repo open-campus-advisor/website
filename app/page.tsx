@@ -140,6 +140,12 @@ export default function Home() {
             Connect to Claude →
           </Link>
           <Link
+            href="/schools"
+            className="text-gray-500 text-sm hover:text-gray-900 transition-colors"
+          >
+            All 101 schools →
+          </Link>
+          <Link
             href="/integrate"
             className="text-gray-500 text-sm hover:text-gray-900 transition-colors"
           >
