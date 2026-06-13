@@ -158,7 +158,7 @@ export default function Home() {
       <section className="bg-slate-50 rounded-2xl px-6 py-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
-            { value: "101", label: "Universities covered" },
+            { value: "100+", label: "Universities covered" },
             { value: "60 min", label: "Data refresh cycle" },
             { value: "28,000+", label: "Faculty profiles" },
             { value: "12,400+", label: "Active NIH grants" },
