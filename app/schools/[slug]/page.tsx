@@ -130,8 +130,8 @@ export default async function SchoolPage({ params }: { params: Promise<{ slug: s
       {deptGroups.length > 20 && (
         <section className="space-y-4">
           <div className="flex items-baseline gap-2">
-            <h2 className="text-xl font-semibold">Departments</h2>
-            <span className="text-xs text-gray-400">{departments.length} total</span>
+            <h2 className="text-xl font-semibold">Course subjects</h2>
+            <span className="text-xs text-gray-400">{departments.length} subject areas</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {deptGroups.map(dept => (
