@@ -74,7 +74,7 @@ export default async function SchoolPage({ params }: { params: Promise<{ slug: s
     .slice(0, 6);
 
   const sampleFaculty = faculty.slice(0, 4);
-  const deptGroups = departments.slice(0, 24);
+  const deptGroups = [...departments].sort((a, b) => a.name.localeCompare(b.name));
 
   // Schema.org structured data
   const jsonLd = {
@@ -129,18 +129,18 @@ export default async function SchoolPage({ params }: { params: Promise<{ slug: s
       {/* Departments */}
       {deptGroups.length > 0 && (
         <section className="space-y-4">
-          <h2 className="text-xl font-semibold">Departments</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div className="flex items-baseline gap-2">
+            <h2 className="text-xl font-semibold">Departments</h2>
+            <span className="text-xs text-gray-400">{departments.length} total</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
             {deptGroups.map(dept => (
-              <div key={dept.code} className="border border-gray-100 rounded-lg px-3 py-2.5 space-y-0.5">
-                <p className="text-xs font-mono text-gray-400">{dept.code}</p>
-                <p className="text-xs text-gray-700 leading-snug">{dept.name}</p>
-              </div>
+              <span key={dept.code} className="inline-flex items-center gap-1.5 border border-gray-100 rounded-full px-3 py-1 text-xs hover:border-gray-300 transition-colors">
+                <span className="font-mono text-gray-400">{dept.code}</span>
+                <span className="text-gray-600">{dept.name}</span>
+              </span>
             ))}
           </div>
-          {departments.length > 24 && (
-            <p className="text-xs text-gray-400">+{departments.length - 24} more departments available via the API.</p>
-          )}
         </section>
       )}
 
