@@ -8,13 +8,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://opencampusadvisor.org/integrate" },
 };
 
-const SCHOOLS = [
-  "Columbia", "Cornell", "MIT", "Stanford", "Yale", "Brown", "Penn", "Dartmouth",
-  "Notre Dame", "Illinois", "Harvey Mudd", "Wesleyan", "Williams", "Middlebury",
-  "Bates", "Vassar", "Swarthmore", "Macalester", "Grinnell", "Davidson",
-  "Pomona", "CMC", "Scripps", "Pitzer", "Morehouse", "Furman", "Hope",
-  "Berry", "Belmont", "JMU", "Radford", "Longwood",
-  "+ 69 more",
+const SCHOOLS: [string, string][] = [
+  ["Columbia","columbia"],["Cornell","cornell"],["MIT","mit"],["Stanford","stanford"],
+  ["Yale","yale"],["Brown","brown"],["Penn","penn"],["Dartmouth","dartmouth"],
+  ["Notre Dame","notredame"],["Illinois","illinois"],["Harvey Mudd","harveymudd"],
+  ["Wesleyan","wesleyan"],["Williams","williams"],["Middlebury","middlebury"],
+  ["Bates","bates"],["Vassar","vassar"],["Swarthmore","swarthmore"],
+  ["Macalester","macalester"],["Grinnell","grinnell"],["Davidson","davidson"],
+  ["Pomona","pomona"],["CMC","cmc"],["Scripps","scripps"],["Pitzer","pitzer"],
+  ["Morehouse","morehouse"],["Furman","furman"],["Hope","hope"],
+  ["Berry","berry"],["Belmont","belmontuniv"],["JMU","jmu"],["Radford","radford"],["Longwood","longwood"],
 ];
 
 const DATA_LAYERS = [
@@ -141,11 +144,15 @@ export default function Integrate() {
         <div>
           <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-3">100+ live institutions</p>
           <div className="flex flex-wrap gap-2">
-            {SCHOOLS.map((s) => (
-              <span key={s} className={`text-xs px-2.5 py-1 rounded-full ${s.startsWith("+") ? "text-gray-400" : "bg-gray-100 text-gray-600 font-medium"}`}>
-                {s}
-              </span>
+            {SCHOOLS.map(([name, slug]) => (
+              <Link key={slug} href={`/schools/${slug}`}
+                className="text-xs bg-gray-100 text-gray-600 font-medium px-2.5 py-1 rounded-full hover:bg-gray-200 hover:text-gray-800 transition-colors">
+                {name}
+              </Link>
             ))}
+            <Link href="/schools" className="text-xs text-gray-400 px-1 hover:text-gray-600 transition-colors">
+              + more →
+            </Link>
           </div>
         </div>
       </section>

@@ -120,10 +120,30 @@ export default function Home() {
           </p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
-          {["Wesleyan", "Columbia", "MIT", "Stanford", "Yale", "Brown", "Cornell", "Penn", "Dartmouth", "Notre Dame", "Illinois", "Harvey Mudd", "Vassar", "GWU", "Bates", "Williams", "Middlebury", "Bryn Mawr", "Gonzaga", "Baylor", "Ole Miss", "CSUN", "Swarthmore", "Macalester", "Georgetown Law", "Lafayette", "Davidson", "Grinnell", "Allegheny", "Pomona", "Claremont McKenna", "Scripps", "Pitzer", "Morehouse", "JMU", "Radford", "Longwood", "Furman", "Hope", "Calvin", "Berry", "Belmont", "Merrimack", "Endicott", "CSU East Bay", "CSU Channel Islands", "Sonoma State", "Goucher", "Providence", "USF"].map(school => (
-            <span key={school} className="text-xs font-medium bg-gray-100 text-gray-500 px-2.5 py-1 rounded-full">{school}</span>
+          {([
+            ["Wesleyan","wesleyan"],["Columbia","columbia"],["MIT","mit"],["Stanford","stanford"],
+            ["Yale","yale"],["Brown","brown"],["Cornell","cornell"],["Penn","penn"],
+            ["Dartmouth","dartmouth"],["Notre Dame","notredame"],["Illinois","illinois"],
+            ["Harvey Mudd","harveymudd"],["Vassar","vassar"],["GWU","gwu"],["Bates","bates"],
+            ["Williams","williams"],["Middlebury","middlebury"],["Bryn Mawr","brynmawr"],
+            ["Gonzaga","gonzaga"],["Baylor","baylor"],["Ole Miss","olemiss"],["CSUN","csun"],
+            ["Swarthmore","swarthmore"],["Macalester","macalester"],["Georgetown Law","georgetownlaw"],
+            ["Lafayette","lafayette"],["Davidson","davidson"],["Grinnell","grinnell"],
+            ["Allegheny","allegheny"],["Pomona","pomona"],["Claremont McKenna","cmc"],
+            ["Scripps","scripps"],["Pitzer","pitzer"],["Morehouse","morehouse"],["JMU","jmu"],
+            ["Radford","radford"],["Longwood","longwood"],["Furman","furman"],["Hope","hope"],
+            ["Calvin","calvin"],["Berry","berry"],["Belmont","belmontuniv"],["Merrimack","merrimack"],
+            ["Endicott","endicott"],["CSU East Bay","csueastbay"],["CSU Channel Islands","csuci"],
+            ["Sonoma State","sonomastate"],["Goucher","goucher"],["Providence","providence"],["USF","usfca"],
+          ] as [string, string][]).map(([name, slug]) => (
+            <Link key={slug} href={`/schools/${slug}`}
+              className="text-xs font-medium bg-gray-100 text-gray-500 px-2.5 py-1 rounded-full hover:bg-gray-200 hover:text-gray-700 transition-colors">
+              {name}
+            </Link>
           ))}
-          <span className="text-xs text-gray-400 px-1">+ 51 more</span>
+          <Link href="/schools" className="text-xs text-gray-400 px-1 hover:text-gray-600 transition-colors">
+            + more →
+          </Link>
         </div>
         <div className="flex items-center gap-4 pt-2 flex-wrap">
           <Link
@@ -133,22 +153,10 @@ export default function Home() {
           >
             Try with ChatGPT →
           </Link>
-          <Link
-            href="/mcp"
-            className="text-gray-500 text-sm hover:text-gray-900 transition-colors"
-          >
+          <Link href="/mcp" className="text-gray-500 text-sm hover:text-gray-900 transition-colors">
             Connect to Claude →
           </Link>
-          <Link
-            href="/schools"
-            className="text-gray-500 text-sm hover:text-gray-900 transition-colors"
-          >
-            Schools →
-          </Link>
-          <Link
-            href="/integrate"
-            className="text-gray-500 text-sm hover:text-gray-900 transition-colors"
-          >
+          <Link href="/integrate" className="text-gray-500 text-sm hover:text-gray-900 transition-colors">
             REST API →
           </Link>
         </div>
