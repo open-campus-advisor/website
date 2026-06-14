@@ -66,7 +66,7 @@ const CAPABILITIES = [
   },
   {
     title: "Faculty & research",
-    description: "Find professors by research topic, see their active NIH grants, publications, and lab opportunities. Compare research strength across top US colleges and universities simultaneously.",
+    description: "Find professors by research topic, see their active NIH grants, recent publications with citation counts, and lab opportunities. Compare research strength across top US colleges and universities simultaneously.",
     examples: ["Who at Stanford studies large language models?", "Which BIOL faculty have active NIH grants?"],
   },
   {
@@ -76,7 +76,7 @@ const CAPABILITIES = [
   },
   {
     title: "Academic paths & career outcomes",
-    description: "Navigate from a career goal backwards to majors, courses, and professors — or forward from a major to see where it leads. Salary ranges, job outlook, and typical employers grounded in BLS data.",
+    description: "Navigate from a career goal backwards to majors, courses, and professors — or forward from a major to see where it leads. Salary ranges, job outlook, named internship programs, and NSF-funded summer research opportunities grounded in real data.",
     examples: ["What major and courses lead to climate policy work?", "What does a machine learning engineer actually earn?"],
   },
 ];
@@ -90,12 +90,12 @@ const HOW_IT_WORKS = [
   {
     step: "02",
     title: "The graph connects",
-    description: "Open Campus Advisor traverses the academic graph in real time — live course data, faculty research, degree requirements, and career outcomes across top US colleges and universities.",
+    description: "Open Campus Advisor traverses the academic graph in real time — live course data, faculty research, OpenAlex publications, NIH grants, degree requirements, career outcomes, and NSF REU programs across top US colleges and universities.",
   },
   {
     step: "03",
     title: "Navigate your path",
-    description: "Get a grounded answer, not a guess. Every fact traces back to live catalog data, faculty profiles, or NIH grant records. Ask follow-up questions to go deeper.",
+    description: "Get a grounded answer, not a guess. Every fact traces back to live catalog data, faculty profiles, NIH grant records, or scholarly publication data. Ask follow-up questions to go deeper.",
   },
 ];
 

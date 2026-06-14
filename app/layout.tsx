@@ -106,9 +106,10 @@ const jsonLd = {
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       featureList: [
         "Live course catalog search across 100+ universities",
-        "Faculty research profiles with NIH grant data",
+        "Faculty research profiles with NIH grant data and OpenAlex publications",
         "Degree requirement navigation",
-        "Career outcome data with BLS salary ranges",
+        "Career outcome data with BLS salary ranges and named internship programs",
+        "NSF-funded summer research (REU) program discovery",
         "Personalized academic path planning",
         "RIASEC interest profile matching",
       ],
