@@ -165,3 +165,4 @@ export const SCHOOL_TYPE_ORDER = [
   "Public University",
   "Law School",
 ];
+

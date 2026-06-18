@@ -1,8 +1,13 @@
-@AGENTS.md
+# Open Campus Advisor — Website (opencampusadvisor.org)
 
-# Open Campus Advisor Website — Claude Code Context
+## What this repo is
 
-Next.js 16 app at `opencampusadvisor.org`. Two concerns: (1) landing page, (2) student profile layer with auth + Supabase persistence + ChatGPT OAuth.
+Pure static marketing site + student profile page. No server-side routes, no auth logic, no database — all of that lives in the main API repo (`api.opencampusadvisor.org`).
+
+**Main API repo:** `github.com/open-campus-advisor/open-campus-advisor` (private)
+**Website repo:** `github.com/open-campus-advisor/website` (this repo, public)
+
+---
 
 ## Repo identity
 
@@ -10,67 +15,91 @@ Next.js 16 app at `opencampusadvisor.org`. Two concerns: (1) landing page, (2) s
 |---|---|
 | GitHub | `github.com/open-campus-advisor/website` (public) |
 | Deploy | Vercel → `opencampusadvisor.org` (auto-deploy on push to main) |
-| Local path | `/Users/tolgserkal/projects/open-campus-advisor-landing` |
-| Core API | `api.opencampusadvisor.org` (Railway) |
+| Local path | `/tmp/oca-landing` |
+| API | `https://api.opencampusadvisor.org` |
+
+---
 
 ## Stack
 
-- Next.js 16 (App Router, Turbopack) + Tailwind CSS 4
-- NextAuth v5 (`next-auth@beta`) — Google OAuth + Nodemailer magic link
-- `@auth/supabase-adapter` — NextAuth user/account persistence
-- `@supabase/supabase-js` — profiles, academic, goals, sessions tables
-- `jose` (via next-auth) — JWT auth codes + access tokens for ChatGPT OAuth
+- Next.js 16 (App Router) + Tailwind CSS
+- No auth libraries — authentication is handled by the API
+- No database — profile storage is Postgres on Railway (API side)
+- No API routes — this is a pure frontend
 
-## Key files
+---
 
-```
-lib/auth.ts               ← NextAuth config — providers, adapter, JWT callbacks
-lib/compress-profile.ts   ← ProfileData → <300 token string injected into AI prompt
-lib/supabase/client.ts    ← browser client (NEXT_PUBLIC_ anon key)
-lib/supabase/server.ts    ← service role client — server-side only, bypasses RLS
-proxy.ts                  ← route guard for /profile (Next.js 16 uses proxy.ts, not middleware.ts)
-app/auth/                 ← sign-in page + SignInForm client component
-app/profile/              ← profile page + ProfileForm + TagInput client components
-app/api/profile/          ← GET/POST /api/profile, POST /api/profile/session
-app/api/oauth/            ← /authorize /token /me — ChatGPT OAuth 2.0 spec
-app/api/auth/[...nextauth]/ ← NextAuth handler
-```
-
-## Route guard
-
-Next.js 16 deprecated `middleware.ts` — use `proxy.ts` at the root instead. Same export shape, same `config.matcher`. Do not create `middleware.ts`.
-
-## Supabase clients
-
-- **Browser client** (`lib/supabase/client.ts`): uses `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Only for client components (currently unused — all data fetching is server-side).
-- **Service client** (`lib/supabase/server.ts`): uses `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`. Server-side only. Bypasses RLS. Never expose to client.
-
-## ChatGPT OAuth flow
-
-1. ChatGPT redirects to `/api/oauth/authorize?client_id=...&redirect_uri=...&state=...&response_type=code`
-2. If not signed in → redirect to `/auth?next=<encoded authorize URL>`
-3. Sign in → redirect back → generate 10-min JWT auth code → redirect to ChatGPT
-4. ChatGPT backend calls `POST /api/oauth/token` with code + client credentials
-5. Returns `{ access_token, token_type, compressed_profile }`
-6. ChatGPT calls `GET /api/oauth/me` with Bearer token → full profile + compressed context
-
-Auth codes and access tokens are stateless JWTs signed with `NEXTAUTH_SECRET`. No extra DB table needed.
-
-## compress-profile output format
+## Pages
 
 ```
-Junior at Yale, Environmental Studies, goal: climate policy, completed: ENV200 PLSC301, constraints: NYC only
+app/
+  page.tsx          ← Main landing — hero, school badges, capabilities, examples
+  layout.tsx        ← Root layout — fonts, metadata, OG tags, favicon
+  integrate/
+    page.tsx        ← B2B integration page (/integrate)
+  profile/
+    page.tsx        ← Student profile (/profile) — client-side JWT, calls API
+  privacy/
+    page.tsx        ← Privacy policy (/privacy)
+  terms/
+    page.tsx        ← Terms of Service (/terms)
+public/
+  logo-rectangle.png ← Full horizontal logo (1774×887) — used in hero
+  logo-mark.png      ← Square mark — used for favicon + apple-touch-icon
+  og-image.png       ← OpenGraph image for social sharing
 ```
 
-Rules: year + school + major first; top 2 career targets; course codes only, max 10; omit empty fields.
+---
 
-## What not to change
+## Profile page — how it works
 
-- **`proxy.ts` filename** — Next.js 16 convention; `middleware.ts` is deprecated
-- **`/api/oauth/*` URL structure** — ChatGPT GPT action hardcodes these
-- **`NEXT_PUBLIC_` prefix** on client-side Supabase env vars
-- **Service role key server-side only** — never import `lib/supabase/server.ts` from a client component
+`app/profile/page.tsx` is a pure client component. No server code.
 
-## Environment variables
+**Auth flow:**
+1. User visits `/api/v1/auth/login` on the API → Google consent → API issues JWT
+2. API redirects to `https://opencampusadvisor.org/profile?token=JWT`
+3. Profile page reads `?token=JWT` from URL, stores in `localStorage` as `oca_token`
+4. Cleans token from URL (`window.history.replaceState`)
+5. Fetches `GET https://api.opencampusadvisor.org/api/v1/profile` with Bearer JWT
+6. Displays and allows editing of StudentContext fields
+7. Saves via `POST https://api.opencampusadvisor.org/api/v1/profile`
 
-See README.md for the full list. Both `SUPABASE_URL` (server) and `NEXT_PUBLIC_SUPABASE_URL` (client) must be set — they're the same URL but with different env var names due to Next.js browser exposure rules.
+**No server-side auth — the profile page has no access to the JWT on the server.** It's all client-side localStorage + fetch. This is intentional — the API handles all auth security.
+
+**Sign in button:** Points to `https://api.opencampusadvisor.org/api/v1/auth/login` (API handles the full OAuth flow).
+
+---
+
+## What NOT to have in this repo
+
+- `next-auth` or any auth library — auth is fully in the API
+- Supabase client — database is in the API
+- `lib/` directory — no shared backend utilities
+- `app/api/` routes — no server-side API routes
+- `middleware.ts` or `proxy.ts` — no route guards (auth state is client-side only)
+- Any `NEXT_PUBLIC_SUPABASE_*` or `NEXTAUTH_*` env vars
+
+---
+
+## Env vars
+
+None required for production. The profile page calls `api.opencampusadvisor.org` directly — no env vars needed on the Vercel side.
+
+---
+
+## Keeping in sync with main repo
+
+When schools are added to the API:
+1. Add badge to the array in `app/page.tsx` hero section
+2. Update school count in `app/integrate/page.tsx` (3 places)
+3. Update school count in `app/layout.tsx` metadata description
+4. Re-import OpenAPI schema in the ChatGPT GPT editor
+
+---
+
+## Running locally
+
+```bash
+npm install
+npm run dev   # → http://localhost:3000
+```

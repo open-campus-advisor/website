@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Integration — REST API & MCP Agentic Tools | Open Campus Advisor",
   description:
-    "Two integration surfaces: a REST API for platforms that already serve students, and a hosted remote MCP server for agentic AI workflows in Claude.ai, Claude Desktop, and Claude Code. 21 tools, session-scoped student context, live data across 128+ US colleges.",
+    "Two integration surfaces: a REST API for platforms that already serve students, and a hosted remote MCP server for agentic AI workflows in Claude.ai, Claude Desktop, and Claude Code. 21 tools, session-scoped student context, live data across 100+ US colleges.",
   alternates: { canonical: "https://opencampusadvisor.org/integrate" },
 };
 
@@ -18,18 +18,13 @@ const SCHOOLS: [string, string][] = [
   ["Pomona","pomona"],["CMC","cmc"],["Scripps","scripps"],["Pitzer","pitzer"],
   ["Morehouse","morehouse"],["Furman","furman"],["Hope","hope"],
   ["Berry","berry"],["Belmont","belmontuniv"],["JMU","jmu"],["Radford","radford"],["Longwood","longwood"],
-  ["Reed","reed"],["Union","union"],["Stonehill","stonehill"],["William & Mary","wm"],
-  ["Tougaloo","tougaloo"],["Carroll U","carroll"],["Malone","malone"],["Baldwin Wallace","baldwinwallace"],
-  ["John Brown","johnbrown"],["Champlain","champlain"],["Moravian","moravian"],["Wilkes","wilkes"],
-  ["Harding","harding"],["Abilene Christian","acu"],["NC A&T","ncat"],["Texas Lutheran","texaslutheran"],
-  ["Fort Valley State","fortvalleystate"],["Winston-Salem State","winstonsalem"],["ECSU","elizabethcitystate"],
 ];
 
 const DATA_LAYERS = [
   { label: "Live course catalogs", detail: "Sections, instructors, enrollment status, and prerequisites — sourced directly from institutional registration systems, refreshed every 60 minutes" },
   { label: "Faculty research profiles", detail: "Research areas, structured publications with citation counts and open-access links (OpenAlex), and active NIH grant data by investigator" },
   { label: "Degree requirements", detail: "344 curated major programs across 28 disciplines — Computer Science, Economics, Biology, Political Science, Engineering, and more — maintained against official institutional catalogs" },
-  { label: "Career outcome data", detail: "62 career pathways across 11 tracks with BLS salary ranges (anchored to SOC codes), day-in-the-life descriptions, salary by seniority level, top graduate programs, RIASEC interest mapping, named internship programs, and live NSF REU summer research opportunities" },
+  { label: "Career outcome data", detail: "47 career pathways across 11 tracks with BLS salary ranges, 10-year outlook projections, skill requirements, RIASEC interest mapping, named internship programs, and live NSF REU summer research opportunities" },
   { label: "Cross-institutional comparison", detail: "Rank institutions by academic strength in any subject area — courses, faculty concentration, and research activity" },
   { label: "Personalized student enrichment", detail: "Filter completed coursework, rank results by stated goals, surface constraint risks, and generate individualized next-semester recommendations" },
 ];
@@ -103,7 +98,7 @@ export default function Integrate() {
           <span className="text-gray-400 font-light">REST API and MCP server.</span>
         </h1>
         <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
-          Two integration surfaces. A <strong className="text-gray-700">REST API</strong> for platforms that already serve students — providing live course catalogs, faculty research, degree requirements, and career outcomes across 128+ institutions. A hosted <strong className="text-gray-700">remote MCP server</strong> for agentic AI workflows in Claude.ai, Claude Desktop, and Claude Code — 21 tools, session-scoped student context, OAuth profile auto-load, no installation required.
+          Two integration surfaces. A <strong className="text-gray-700">REST API</strong> for platforms that already serve students — providing live course catalogs, faculty research, degree requirements, and career outcomes across 100+ institutions. A hosted <strong className="text-gray-700">remote MCP server</strong> for agentic AI workflows in Claude.ai, Claude Desktop, and Claude Code — 21 tools, session-scoped student context, OAuth profile auto-load, no installation required.
         </p>
         <p className="text-lg text-gray-500 max-w-2xl leading-relaxed">
           Your product surface. Your student relationship. Our data infrastructure.
@@ -147,7 +142,7 @@ export default function Integrate() {
           ))}
         </div>
         <div>
-          <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-3">128 live institutions</p>
+          <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-3">100+ live institutions</p>
           <div className="flex flex-wrap gap-2">
             {SCHOOLS.map(([name, slug]) => (
               <Link key={slug} href={`/schools/${slug}`}
@@ -197,7 +192,7 @@ export default function Integrate() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
-            { label: "21 structured tools", detail: "Course search, faculty research, OpenAlex publications, NSF REU programs, degree requirements, career outcomes, cross-school comparison, and gap reporting — all discrete MCP tools with typed schemas across all 128 schools." },
+            { label: "21 structured tools", detail: "Course search, faculty research, OpenAlex publications, NSF REU programs, degree requirements, career outcomes, cross-school comparison, and gap reporting — all discrete MCP tools with typed schemas across all 100+ schools." },
             { label: "No installation required", detail: "Connect via a single URL. No npm install, no local process, no SCHOOL env var. Works in Claude.ai web, Claude Desktop, and Claude Code out of the box." },
             { label: "Session-scoped student context", detail: "set_student_context merges the student's profile progressively across turns. Course results are filtered and ranked automatically. RIASEC codes auto-derive career targets." },
             { label: "OAuth profile auto-load", detail: "When a student signs in with Google through Claude.ai, their stored StudentContext loads automatically at session start — no manual set_student_context call needed." },
@@ -289,7 +284,7 @@ get_student_context()
             <p className="text-xs font-medium uppercase tracking-widest text-gray-400">Provided by Open Campus Advisor</p>
             <ul className="space-y-2 text-sm text-gray-700">
               {[
-                "Live course catalog data across 128+ institutions",
+                "Live course catalog data across 100+ institutions",
                 "Faculty research profiles, OpenAlex publications, and NIH grant records",
                 "Curated degree requirements and career outcome data",
                 "Data sourcing, parsing, maintenance, and uptime",

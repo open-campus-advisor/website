@@ -26,7 +26,7 @@ const TOOLS = [
   },
   {
     category: "Cross-School",
-    description: "Search or compare across all 128 schools simultaneously.",
+    description: "Search or compare across all 100+ schools simultaneously.",
     tools: [
       { name: "search_all_schools", params: "query, schools?", description: "Course offerings across all schools ranked by topic coverage." },
       { name: "search_faculty_all_schools", params: "query, schools?", description: "Researchers across all schools by topic — auto-discovers departments." },
