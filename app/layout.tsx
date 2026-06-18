@@ -105,7 +105,7 @@ const jsonLd = {
       publisher: { "@id": `${SITE_URL}/#organization` },
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       featureList: [
-        "Live course catalog search across 128 universities",
+        "Live course catalog search across 125+ universities",
         "Faculty research profiles with NIH grant data and OpenAlex publications",
         "Degree requirement navigation",
         "Career outcome data with BLS salary ranges and named internship programs",
@@ -122,7 +122,7 @@ const jsonLd = {
           name: "Which colleges does Open Campus Advisor cover?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Open Campus Advisor covers 128 US colleges and universities including MIT, Stanford, Yale, Brown, Columbia, Cornell, Penn, Dartmouth, Notre Dame, University of Illinois, and more.",
+            text: "Open Campus Advisor covers 125+ US colleges and universities including MIT, Stanford, Yale, Brown, Columbia, Cornell, Penn, Dartmouth, Notre Dame, University of Illinois, and more.",
           },
         },
         {

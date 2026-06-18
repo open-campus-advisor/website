@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "MCP Server — Open Campus Advisor",
-  description: "Connect Open Campus Advisor to Claude as a remote MCP server. 19 tools, live data across 100+ colleges, session-scoped student context. No installation required.",
+  description: "Connect Open Campus Advisor to Claude as a remote MCP server. 19 tools, live data across 125+ colleges, session-scoped student context. No installation required.",
   alternates: { canonical: "https://opencampusadvisor.org/mcp" },
 };
 
@@ -26,7 +26,7 @@ const TOOLS = [
   },
   {
     category: "Cross-School",
-    description: "Search or compare across all 100+ schools simultaneously.",
+    description: "Search or compare across all 125+ schools simultaneously.",
     tools: [
       { name: "search_all_schools", params: "query, schools?", description: "Course offerings across all schools ranked by topic coverage." },
       { name: "search_faculty_all_schools", params: "query, schools?", description: "Researchers across all schools by topic — auto-discovers departments." },
@@ -111,7 +111,7 @@ export default function MCPPage() {
           <span className="text-gray-400 font-light">No installation.</span>
         </h1>
         <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
-          Open Campus Advisor runs as a hosted <strong className="text-gray-700">Model Context Protocol server</strong> — connect Claude to live course catalogs, faculty research, degree requirements, and career outcomes across 100+ US colleges and universities.
+          Open Campus Advisor runs as a hosted <strong className="text-gray-700">Model Context Protocol server</strong> — connect Claude to live course catalogs, faculty research, degree requirements, and career outcomes across 125+ US colleges and universities.
         </p>
         <div className="bg-gray-50 border border-gray-200 rounded-xl px-5 py-4 flex items-center gap-4">
           <span className="text-xs font-medium text-gray-400 uppercase tracking-widest shrink-0">MCP URL</span>
