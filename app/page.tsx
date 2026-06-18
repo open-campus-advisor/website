@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Open Campus Advisor — AI Academic Advisor | Course Search, Faculty Research & Career Planning",
+  description: "The AI academic advisor that knows your campus. Search live courses, find research faculty with active NIH grants, navigate degree requirements, and map your path from goals to career outcomes — across MIT, Stanford, Yale, and 125 more US colleges and universities.",
+  alternates: { canonical: "https://opencampusadvisor.org" },
+};
 
 const EXAMPLES = [
   // Path & career — the most differentiated, lead with it
@@ -45,6 +52,10 @@ const EXAMPLES = [
     q: "Which BIOL faculty have active NIH grants right now?",
     category: "Research",
   },
+  {
+    q: "What research is happening in Notre Dame's theology and global affairs departments?",
+    category: "Research",
+  },
 ];
 
 const CAPABILITIES = [
@@ -55,13 +66,18 @@ const CAPABILITIES = [
   },
   {
     title: "Faculty & research",
-    description: "Find professors by research topic, see their active NIH grants, publications, and lab opportunities. Compare research strength across all five institutions simultaneously.",
+    description: "Find professors by research topic, see their active NIH grants, recent publications with citation counts, and lab opportunities. Compare research strength across top US colleges and universities simultaneously.",
     examples: ["Who at Stanford studies large language models?", "Which BIOL faculty have active NIH grants?"],
   },
   {
-    title: "Academic paths",
-    description: "Navigate from a career goal backwards to majors, courses, and professors. Or start from a college or university and see where each major leads — salary ranges, job outlook, and typical employers included.",
-    examples: ["What major and courses lead to climate policy work?", "Compare CS programs at MIT and Stanford by curriculum and faculty."],
+    title: "Degree requirements",
+    description: "Real major requirements — not approximations. CS, Economics, History, Biology, Political Science, Philosophy, and dozens more, curated from official catalogs and kept current. Covers open curriculum schools, distribution requirements, and core programs.",
+    examples: ["What courses do I need for the CS major at Brown?", "How do MIT and Stanford differ in their CS requirements?"],
+  },
+  {
+    title: "Academic paths & career outcomes",
+    description: "Navigate from a career goal backwards to majors, courses, and professors — or forward from a major to see where it leads. Salary ranges, job outlook, named internship programs, and NSF-funded summer research opportunities grounded in real data.",
+    examples: ["What major and courses lead to climate policy work?", "What does a machine learning engineer actually earn?"],
   },
 ];
 
@@ -74,36 +90,70 @@ const HOW_IT_WORKS = [
   {
     step: "02",
     title: "The graph connects",
-    description: "Open Campus Advisor traverses the academic graph in real time — live course data, faculty research, degree requirements, and career outcomes across all five institutions.",
+    description: "Open Campus Advisor traverses the academic graph in real time — live course data, faculty research, OpenAlex publications, NIH grants, degree requirements, career outcomes, and NSF REU programs across top US colleges and universities.",
   },
   {
     step: "03",
     title: "Navigate your path",
-    description: "Get a grounded answer, not a guess. Every fact traces back to live catalog data, faculty profiles, or NIH grant records. Ask follow-up questions to go deeper.",
+    description: "Get a grounded answer, not a guess. Every fact traces back to live catalog data, faculty profiles, NIH grant records, or scholarly publication data. Ask follow-up questions to go deeper.",
   },
 ];
 
 export default function Home() {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-6 space-y-24">
+    <main className="max-w-4xl mx-auto px-6 pt-12 pb-6 space-y-24">
 
       {/* Hero */}
-      <section className="space-y-6">
-        <div className="flex justify-center">
-          <Image src="/logo-mark.png" alt="Open Campus Advisor" width={420} height={420} className="rounded-3xl"/>
+      <section className="space-y-5">
+        <div className="flex justify-center mb-6">
+          <Image src="/logo-rectangle.png" alt="Open Campus Advisor" width={480} height={240} className="rounded-2xl"/>
         </div>
-        <p className="text-2xl text-gray-400 font-light leading-snug">
-          Academic navigation for students.
-        </p>
-        <p className="text-xl text-gray-500 max-w-xl leading-relaxed">
-          From career goal to course sequence — across eighteen colleges and universities — through natural conversation with Claude or ChatGPT.
-        </p>
+        <div className="space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">
+            Academic navigation for students
+          </p>
+          <p className="text-2xl font-semibold text-gray-900 leading-snug">
+            Know exactly where you&apos;re going.
+          </p>
+          <p className="text-lg text-gray-500 leading-relaxed">
+            Real courses, real faculty, real career outcomes — through natural conversation with Claude or ChatGPT.
+          </p>
+        </div>
         <div className="flex items-center gap-2 flex-wrap">
-          {["Wesleyan", "Columbia", "MIT", "Stanford", "Yale", "Brown", "Cornell", "Penn", "Dartmouth", "Vassar", "GWU", "Bates", "Williams", "Middlebury", "Swarthmore", "Oberlin", "Macalester", "Georgetown Law"].map(school => (
-            <span key={school} className="text-xs font-medium bg-gray-100 text-gray-500 px-2.5 py-1 rounded-full">{school}</span>
+          {([
+            ["Wesleyan","wesleyan"],["Columbia","columbia"],["MIT","mit"],["Stanford","stanford"],
+            ["Yale","yale"],["Brown","brown"],["Cornell","cornell"],["Penn","penn"],
+            ["Dartmouth","dartmouth"],["Notre Dame","notredame"],["Illinois","illinois"],
+            ["Harvey Mudd","harveymudd"],["Vassar","vassar"],["GWU","gwu"],["Bates","bates"],
+            ["Williams","williams"],["Middlebury","middlebury"],["Bryn Mawr","brynmawr"],
+            ["Gonzaga","gonzaga"],["Baylor","baylor"],["Ole Miss","olemiss"],["CSUN","csun"],
+            ["Swarthmore","swarthmore"],["Macalester","macalester"],["Georgetown Law","georgetownlaw"],
+            ["Lafayette","lafayette"],["Davidson","davidson"],["Grinnell","grinnell"],
+            ["Allegheny","allegheny"],["Pomona","pomona"],["Claremont McKenna","cmc"],
+            ["Scripps","scripps"],["Pitzer","pitzer"],["Morehouse","morehouse"],["JMU","jmu"],
+            ["Radford","radford"],["Longwood","longwood"],["Furman","furman"],["Hope","hope"],
+            ["Calvin","calvin"],["Berry","berry"],["Belmont","belmontuniv"],["Merrimack","merrimack"],
+            ["Endicott","endicott"],["CSU East Bay","csueastbay"],["CSU Channel Islands","csuci"],
+            ["Sonoma State","sonomastate"],["Goucher","goucher"],["Providence","providence"],["USF","usfca"],
+            ["Reed","reed"],["Union","union"],["Stonehill","stonehill"],["NW Missouri State","nwmissouri"],
+            ["William & Mary","wm"],["Tougaloo","tougaloo"],["Carroll U","carroll"],
+            ["Malone","malone"],["Baldwin Wallace","baldwinwallace"],["Mount St. Mary's","mountstmarys"],["Neumann","neumann"],
+            ["John Brown","johnbrown"],["Elizabethtown","elizabethtown"],["Champlain","champlain"],["Moravian","moravian"],
+            ["Misericordia","misericordia"],["Wilkes","wilkes"],["Harding","harding"],["Abilene Christian","acu"],
+            ["SF Austin","sfasu"],["Midwestern State","midwesternstate"],["Jarvis Christian","jarvis"],
+            ["Fort Valley State","fortvalleystate"],["NC A&T","ncat"],["Winston-Salem State","winstonsalem"],
+            ["Elizabeth City State","elizabethcitystate"],["Texas Lutheran","texaslutheran"],
+          ] as [string, string][]).map(([name, slug]) => (
+            <Link key={slug} href={`/schools/${slug}`}
+              className="text-xs font-medium bg-gray-100 text-gray-500 px-2.5 py-1 rounded-full hover:bg-gray-200 hover:text-gray-700 transition-colors">
+              {name}
+            </Link>
           ))}
+          <Link href="/schools" className="text-xs text-gray-400 px-1 hover:text-gray-600 transition-colors">
+            + more →
+          </Link>
         </div>
-        <div className="flex items-center gap-4 pt-2">
+        <div className="flex items-center gap-4 pt-2 flex-wrap">
           <Link
             href="https://chatgpt.com/g/g-6a2583a8a7cc819198378184eaf9b15f-wesleyan-academic-advisor"
             target="_blank"
@@ -111,12 +161,29 @@ export default function Home() {
           >
             Try with ChatGPT →
           </Link>
-          <Link
-            href="mailto:hello@opencampusadvisor.org"
-            className="text-gray-500 text-sm hover:text-gray-900 transition-colors"
-          >
-            Bring it to your campus →
+          <Link href="/mcp" className="text-gray-500 text-sm hover:text-gray-900 transition-colors">
+            Connect to Claude →
           </Link>
+          <Link href="/integrate" className="text-gray-500 text-sm hover:text-gray-900 transition-colors">
+            REST API →
+          </Link>
+        </div>
+      </section>
+
+      {/* Trust signal strip */}
+      <section className="bg-slate-50 rounded-2xl px-6 py-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {[
+            { value: "128", label: "Universities covered" },
+            { value: "60 min", label: "Data refresh cycle" },
+            { value: "35,000+", label: "Faculty profiles" },
+            { value: "15,000+", label: "Active NIH grants" },
+          ].map(s => (
+            <div key={s.label} className="space-y-1">
+              <p className="text-2xl font-bold text-gray-900">{s.value}</p>
+              <p className="text-xs text-gray-400">{s.label}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -173,20 +240,48 @@ export default function Home() {
       </section>
 
       {/* For institutions */}
-      <section className="space-y-6">
+      <section className="space-y-8">
         <h2 className="text-2xl font-semibold">For colleges & universities</h2>
-        <p className="text-gray-500 max-w-xl">
-          Any college or university with a public course catalog can be connected. Students get live course search, faculty research, degree requirements, and career path navigation — all through Claude or ChatGPT, with no new app to install.
-        </p>
-        <p className="text-gray-500 max-w-xl">
-          Every query is logged anonymously. Your institution gets a dashboard showing what students are actually exploring — trending topics, popular departments, common career paths — updated in real time.
-        </p>
-        <Link
-          href="mailto:hello@opencampusadvisor.org"
-          className="inline-block bg-gray-900 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-700 transition-colors"
-        >
-          Get in touch →
-        </Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+          {/* Direct use */}
+          <div className="border border-gray-100 rounded-xl p-6 space-y-3">
+            <p className="text-xs font-medium uppercase tracking-widest text-gray-400">Connect your campus</p>
+            <p className="text-sm text-gray-500 leading-relaxed">
+              Any college or university with a public course catalog can be connected. Students get live course search, faculty research, degree requirements, and career navigation — through Claude or ChatGPT, no new app required.
+            </p>
+            <p className="text-sm text-gray-500 leading-relaxed">
+              Every query is logged anonymously. Your institution sees what students are actually exploring — trending topics, popular departments, common career paths.
+            </p>
+            <Link
+              href="mailto:hello@opencampusadvisor.org"
+              className="inline-block text-sm text-gray-900 underline hover:no-underline"
+            >
+              Bring it to your campus →
+            </Link>
+          </div>
+
+          {/* API / Platform integration */}
+          <div className="border border-gray-100 rounded-xl p-6 space-y-3">
+            <p className="text-xs font-medium uppercase tracking-widest text-gray-400">For platforms</p>
+            <p className="text-sm text-gray-500 leading-relaxed">
+              If your platform already owns the student relationship — Scoir, Naviance, College Board, a counseling tool — you don&apos;t need to build the data layer. Ours is live across dozens of top US colleges and universities.
+            </p>
+            <p className="text-sm text-gray-500 leading-relaxed">
+              Three endpoints. Your product, our data.
+            </p>
+            <div className="pt-1 space-y-2">
+              <pre className="bg-gray-50 text-gray-600 text-xs px-3 py-2 rounded-lg leading-relaxed">POST /api/v1/batch/path{"\n"}x-institution-id: your-platform</pre>
+              <Link
+                href="/integrate"
+                className="inline-block text-sm text-gray-900 underline hover:no-underline"
+              >
+                See integration docs →
+              </Link>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       {/* Footer */}
@@ -194,6 +289,7 @@ export default function Home() {
         <span>© 2026 Open Campus Advisor</span>
         <div className="flex gap-6">
           <Link href="mailto:hello@opencampusadvisor.org" className="hover:text-gray-600 transition-colors">Contact</Link>
+          <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
           <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
         </div>
       </footer>
