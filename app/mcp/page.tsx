@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "MCP Server — Open Campus Advisor",
-  description: "Connect Open Campus Advisor to Claude as a remote MCP server. 19 tools, live data across 125+ colleges, session-scoped student context. No installation required.",
+  description: "Connect Open Campus Advisor to Claude as a remote MCP server. 21 tools, live data across 125+ colleges, session-scoped student context. No installation required.",
   alternates: { canonical: "https://opencampusadvisor.org/mcp" },
 };
 
@@ -30,6 +30,7 @@ const TOOLS = [
     tools: [
       { name: "search_all_schools", params: "query, schools?", description: "Course offerings across all schools ranked by topic coverage." },
       { name: "search_faculty_all_schools", params: "query, schools?", description: "Researchers across all schools by topic — auto-discovers departments." },
+      { name: "search_reu_programs", params: "field", description: "Active NSF-funded summer Research Experience for Undergraduates (REU) programs by research field." },
     ],
   },
   {
@@ -107,7 +108,7 @@ export default function MCPPage() {
       <section className="space-y-6">
         <p className="text-xs font-medium uppercase tracking-widest text-gray-400">Remote MCP Server</p>
         <h1 className="text-4xl font-bold leading-tight tracking-tight">
-          19 tools. One URL.<br />
+          21 tools. One URL.<br />
           <span className="text-gray-400 font-light">No installation.</span>
         </h1>
         <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
@@ -156,7 +157,7 @@ export default function MCPPage() {
           <div className="border border-gray-100 rounded-xl p-6 space-y-3">
             <p className="font-medium text-gray-900 text-sm">API Key — Claude Code / Desktop</p>
             <p className="text-xs text-gray-500 leading-relaxed">
-              Course data is publicly readable — no key required to use the tools. Add <code className="bg-gray-100 px-1 rounded">Authorization: Bearer &lt;key&gt;</code> to attribute usage to your institution in analytics. Contact <a href="mailto:hello@opencampusadvisor.org" className="underline">hello@opencampusadvisor.org</a> to request a key.
+              Course data is publicly readable — no key required to use the tools. Send <code className="bg-gray-100 px-1 rounded">x-api-key: oca_live_...</code> to attribute usage to your institution in analytics. Contact <a href="mailto:hello@opencampusadvisor.org" className="underline">hello@opencampusadvisor.org</a> to request a key.
             </p>
           </div>
         </div>
@@ -245,7 +246,11 @@ loras · sweetbriar · tusculum · ncwesleyan · belmontuniv · sienaheights · 
 merrimack · endicott · berry · brenau · wesleyancollege · shorter · salisbury
 coppinstate · morganstate · shenandoah · radford · longwood · jmu · nec · rivier
 anselm · wou · pacificu · usd · sonomastate · csueastbay · csuci · chowan
-heidelberg · cmc · scripps · pitzer · ggc · coastal · uncpembroke · pomona`}</code>
+heidelberg · cmc · scripps · pitzer · ggc · coastal · uncpembroke · pomona
+reed · union · stonehill · nwmissouri · wm · tougaloo · carroll · malone
+baldwinwallace · mountstmarys · neumann · johnbrown · elizabethtown · champlain
+moravian · misericordia · wilkes · harding · acu · sfasu · midwesternstate
+jarvis · fortvalleystate · ncat · winstonsalem · elizabethcitystate · texaslutheran`}</code>
         </pre>
       </section>
 

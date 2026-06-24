@@ -6,7 +6,7 @@ const geist = Geist({ subsets: ["latin"] });
 
 const TITLE = "Open Campus Advisor — AI Academic Advisor for College Students";
 const DESCRIPTION =
-  "The AI academic advisor that knows your campus. Live course catalogs, faculty research, degree requirements, and career outcomes across 100+ top US colleges — through natural conversation with Claude or ChatGPT.";
+  "The AI academic advisor that knows your campus. Live course catalogs, faculty research, degree requirements, and career outcomes across 125+ US colleges and universities — through natural conversation with Claude or ChatGPT.";
 const SITE_URL = "https://opencampusadvisor.org";
 
 export const metadata: Metadata = {

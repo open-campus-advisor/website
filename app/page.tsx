@@ -155,7 +155,7 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-4 pt-2 flex-wrap">
           <Link
-            href="https://chatgpt.com/g/g-6a2583a8a7cc819198378184eaf9b15f-wesleyan-academic-advisor"
+            href="https://chatgpt.com/g/g-6a2583a8a7cc819198378184eaf9b15f-open-campus-advisor"
             target="_blank"
             className="bg-gray-900 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-700 transition-colors"
           >

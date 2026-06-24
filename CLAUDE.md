@@ -15,7 +15,7 @@ Pure static marketing site + student profile page. No server-side routes, no aut
 |---|---|
 | GitHub | `github.com/open-campus-advisor/website` (public) |
 | Deploy | Vercel → `opencampusadvisor.org` (auto-deploy on push to main) |
-| Local path | `/tmp/oca-landing` |
+| Local path | `/Users/tolgserkal/projects/open-campus-advisor-landing` |
 | API | `https://api.opencampusadvisor.org` |
 
 ---
@@ -90,10 +90,31 @@ None required for production. The profile page calls `api.opencampusadvisor.org`
 ## Keeping in sync with main repo
 
 When schools are added to the API:
-1. Add badge to the array in `app/page.tsx` hero section
-2. Update school count in `app/integrate/page.tsx` (3 places)
-3. Update school count in `app/layout.tsx` metadata description
-4. Re-import OpenAPI schema in the ChatGPT GPT editor
+1. Add badge to the array in `app/page.tsx` hero section (curated selection, not exhaustive)
+2. Add entry to `lib/schools.ts` with name, location, type, enrollment, highlight
+3. Add slug to the school slug list in `app/mcp/page.tsx` (preformatted code block)
+4. Update school count copy across pages — use `125+` (not the exact internal count)
+5. Update `public/llms.txt` covered institutions list
+6. Add `<url>` entry to `public/sitemap.xml`
+7. Re-import OpenAPI schema in the ChatGPT GPT editor
+
+When MCP tools are added:
+1. Add tool row to the TOOLS array in `app/mcp/page.tsx`
+2. Update the tool count in `app/mcp/page.tsx` hero h1 and metadata description
+3. Update tool count in `app/integrate/page.tsx` hero paragraph and MCP feature card
+
+When career count changes:
+1. Update "62 career pathways" in `app/integrate/page.tsx` DATA_LAYERS
+
+Public-facing school count convention: always use `125+` (or `125+ colleges and universities`)
+— never the exact internal number. Update the `125+` threshold only when coverage crosses
+the next round number (e.g. 150+).
+
+Auth story (keep consistent across pages):
+- Claude.ai MCP: OAuth — sign in with Google, student profile loads automatically
+- Claude Code / Desktop MCP: no key required; use `x-api-key: oca_live_...` header for institution analytics
+- REST API (B2B): `x-api-key: oca_live_...` required for personalization endpoints and analytics
+- Mode 1 (student JWT): `Authorization: Bearer <jwt>` — issued by `/api/v1/auth/login` OAuth flow
 
 ---
 

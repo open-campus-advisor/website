@@ -24,7 +24,7 @@ const DATA_LAYERS = [
   { label: "Live course catalogs", detail: "Sections, instructors, enrollment status, and prerequisites — sourced directly from institutional registration systems, refreshed every 60 minutes" },
   { label: "Faculty research profiles", detail: "Research areas, structured publications with citation counts and open-access links (OpenAlex), and active NIH grant data by investigator" },
   { label: "Degree requirements", detail: "344 curated major programs across 28 disciplines — Computer Science, Economics, Biology, Political Science, Engineering, and more — maintained against official institutional catalogs" },
-  { label: "Career outcome data", detail: "47 career pathways across 11 tracks with BLS salary ranges, 10-year outlook projections, skill requirements, RIASEC interest mapping, named internship programs, and live NSF REU summer research opportunities" },
+  { label: "Career outcome data", detail: "62 career pathways across 11 tracks with BLS salary ranges, 10-year outlook projections, skill requirements, RIASEC interest mapping, named internship programs, and live NSF REU summer research opportunities" },
   { label: "Cross-institutional comparison", detail: "Rank institutions by academic strength in any subject area — courses, faculty concentration, and research activity" },
   { label: "Personalized student enrichment", detail: "Filter completed coursework, rank results by stated goals, surface constraint risks, and generate individualized next-semester recommendations" },
 ];
