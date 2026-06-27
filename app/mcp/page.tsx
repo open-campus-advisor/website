@@ -274,13 +274,18 @@ jarvis · fortvalleystate · ncat · winstonsalem · elizabethcitystate · texas
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 pt-8 flex items-center justify-between text-sm text-gray-400">
-        <span>© 2026 Open Campus Advisor</span>
-        <div className="flex gap-6">
-          <Link href="mailto:hello@opencampusadvisor.org" className="hover:text-gray-600 transition-colors">Contact</Link>
-          <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
-          <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
+      <footer className="border-t border-gray-100 pt-8 space-y-3">
+        <div className="flex items-center justify-between text-sm text-gray-400">
+          <span>© 2026 Open Campus Advisor</span>
+          <div className="flex gap-6">
+            <Link href="mailto:hello@opencampusadvisor.org" className="hover:text-gray-600 transition-colors">Contact</Link>
+            <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
+            <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
+          </div>
         </div>
+        <p className="text-xs text-gray-400 leading-relaxed">
+          Open Campus Advisor is an independent educational platform and is not affiliated with, endorsed by, or sponsored by any college, university, or institution unless explicitly stated.
+        </p>
       </footer>
 
     </main>
