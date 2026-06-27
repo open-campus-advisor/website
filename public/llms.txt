@@ -11,12 +11,52 @@ Open Campus Advisor is an academic data platform that connects students to real,
 - **Degree requirements**: Navigate major requirements, elective choices, and prerequisite sequences across schools (344 curated programs, 28 disciplines).
 - **Career outcomes**: Explore 62 career paths with BLS salary data, job outlook, skills, and the academic paths that lead there.
 - **Academic path planning**: Ask "where should I study to become a climate policy analyst?" and get schools ranked by course offerings + faculty + research funding.
+- **Academic fit scoring** (`POST /api/v1/fit`): Score a student's academic profile against one or more schools — course overlap, major alignment, learning environment fit, and research opportunity match. Academic fit, not admissions likelihood.
+- **AP/IB credit articulation** (`POST /api/v1/credit-articulation`): See which AP and IB exam scores earn credit at specific schools, which requirements they satisfy, and how many semesters of required coursework a student can skip. Pilot: Yale, MIT, Columbia, Brown, Stanford.
+- **Multi-term academic planning** (`POST /api/v1/plan`): Generate a graph-backed course sequence recommendation for the next 2–4 semesters, grounded in real major requirements and completed coursework. Not a registrar-grade degree audit — a smart planning layer.
 - **NSF REU discovery**: Find active NSF-funded summer research programs by field across all schools.
 - **Personalized recommendations**: With a student profile (completed courses, career goals, constraints), responses are filtered and ranked to the specific student.
+
+## Key URLs
+
+- Homepage: https://opencampusadvisor.org
+- School directory: https://opencampusadvisor.org/schools
+- School page pattern: https://opencampusadvisor.org/schools/{slug}
+  - Example: https://opencampusadvisor.org/schools/mit
+  - Example: https://opencampusadvisor.org/schools/yale
+  - Example: https://opencampusadvisor.org/schools/wesleyan
+- School comparison index: https://opencampusadvisor.org/compare
+- School comparison pages: https://opencampusadvisor.org/compare/{slug1}-vs-{slug2}
+  - Example: https://opencampusadvisor.org/compare/yale-vs-columbia
+  - Example: https://opencampusadvisor.org/compare/mit-vs-stanford
+  - Example: https://opencampusadvisor.org/compare/morehouse-vs-xaviernola
+- MCP server documentation: https://opencampusadvisor.org/mcp
+- REST API integration docs: https://opencampusadvisor.org/integrate
+- REST API base: https://api.opencampusadvisor.org/api/v1
+- OpenAPI spec: https://api.opencampusadvisor.org/openapi.json
+- Sitemap: https://opencampusadvisor.org/sitemap.xml
+- ChatGPT GPT: https://chatgpt.com/g/g-6a2583a8a7cc819198378184eaf9b15f-open-campus-advisor
+- Remote MCP server: https://api.opencampusadvisor.org/mcp
 
 ## Covered institutions (125+)
 
 MIT, Stanford, Yale, Brown, Columbia, Cornell, Penn, Dartmouth, Notre Dame, University of Illinois Urbana-Champaign, Wesleyan, Williams, Middlebury, Bates, Vassar, Bryn Mawr, Colorado College, Harvey Mudd, Swarthmore, Oberlin, Macalester, Baylor, Gonzaga, Ole Miss, CSU Northridge, CSU Chico, CSU Dominguez Hills, Rose-Hulman, Georgetown Law, GWU, Lafayette, Seton Hall, Salve Regina, Niagara, Eastern, Immaculata, Point Loma, Davidson, Grinnell, Pomona, Claremont McKenna, Scripps, Pitzer, Morehouse, JMU, Radford, Longwood, Furman, Hope, Calvin, Berry, Belmont, Merrimack, Endicott, CSU East Bay, CSU Channel Islands, Sonoma State, Goucher, Providence, USF, Reed, Union, Stonehill, Northwest Missouri State, William & Mary, Tougaloo, Carroll, Malone, Baldwin Wallace, Mount St. Mary's, Neumann, John Brown University, Elizabethtown, Champlain, Moravian, Misericordia, Wilkes, Harding, Abilene Christian, Stephen F. Austin State, Midwestern State, Jarvis Christian, Fort Valley State, NC A&T, Winston-Salem State, Elizabeth City State, Texas Lutheran, and more.
+
+Full list with slugs: https://opencampusadvisor.org/schools
+
+## Curated school comparisons
+
+Academic comparisons (programs, career paths, first-year experience — not rankings):
+- Yale vs Columbia: https://opencampusadvisor.org/compare/yale-vs-columbia
+- MIT vs Stanford: https://opencampusadvisor.org/compare/mit-vs-stanford
+- Brown vs Penn: https://opencampusadvisor.org/compare/brown-vs-penn
+- Williams vs Wesleyan: https://opencampusadvisor.org/compare/williams-vs-wesleyan
+- Swarthmore vs Pomona: https://opencampusadvisor.org/compare/swarthmore-vs-pomona
+- Morehouse vs Xavier NOLA: https://opencampusadvisor.org/compare/morehouse-vs-xaviernola
+- Harvey Mudd vs Rose-Hulman: https://opencampusadvisor.org/compare/harveymudd-vs-rosehulman
+- Notre Dame vs Gonzaga: https://opencampusadvisor.org/compare/notredame-vs-gonzaga
+- Oberlin vs Grinnell: https://opencampusadvisor.org/compare/oberlin-vs-grinnell
+- Full comparison index: https://opencampusadvisor.org/compare
 
 ## How to use it
 
@@ -50,6 +90,36 @@ Claude Desktop — add to claude_desktop_config.json:
 
 **API (for platforms):** REST API at https://api.opencampusadvisor.org — full OpenAPI spec at https://api.opencampusadvisor.org/openapi.json
 
+## MCP tool names (21 tools)
+
+Per-school tools (require a `school` slug parameter):
+- `list_departments` — all department codes at a school
+- `search_courses` — find courses by keyword and/or department
+- `get_course_details` — full course record including prerequisites and seat availability
+- `list_first_year_seminars` — first-year seminar listings
+- `list_courses_for_freshmen` — intro-level courses available to first-years in a department
+- `list_gen_ed_courses` — courses fulfilling distribution/gen-ed requirements
+- `search_by_instructor` — all courses taught by a specific professor
+- `search_faculty_research` — faculty by research topic
+- `get_faculty_profile` — full faculty profile with NIH grants and publications
+
+Cross-school tools (search all 125+ schools at once):
+- `list_schools` — all available school slugs
+- `search_all_schools` — course offerings across all schools ranked by topic coverage
+- `search_faculty_all_schools` — researchers across all schools by topic
+- `search_reu_programs` — active NSF REU programs by research field
+- `explore_academic_path` — full academic path for a career goal, schools ranked
+- `get_major_requirements` — degree requirements for a major at a school
+- `get_career_outcomes` — career salary, outlook, and skills
+- `get_career_paths` — majors and schools that lead to a career
+
+Student context tools (session-scoped):
+- `set_student_context` — merge student profile into the session
+- `get_student_context` — read back the stored student profile
+
+System:
+- `report_answer_gap` — log when the system can't answer a query
+
 ## Key facts
 
 - 125+ colleges and universities with live enrollment data
@@ -58,7 +128,20 @@ Claude Desktop — add to claude_desktop_config.json:
 - 62 career outcome profiles with BLS salary data and RIASEC interest codes
 - Faculty profiles include active NIH grants from NIH Reporter API and OpenAlex publications
 - Data refreshed every 60 minutes from institutional sources
-- Free for students; B2B REST API for platforms
+- Academic fit scoring: curriculum and major alignment signals, not admissions likelihood
+- AP/IB credit articulation pilot: Yale, MIT, Columbia, Brown, Stanford
+- Multi-term planning: graph-backed course sequence from declared major and completed coursework
+- Free for students; B2B REST API for platforms and institutions
+
+## Data constraints and caveats
+
+- **AP/IB credit articulation** is a pilot covering 5 schools only: Yale, MIT, Columbia, Brown, Stanford. It does not yet cover the other 120+ schools.
+- **Multi-term planning** (`/api/v1/plan`) is a planning recommendation layer, not a registrar-grade degree audit. It does not verify every catalog rule or exception.
+- **Academic fit scoring** (`/api/v1/fit`) measures curriculum alignment and learning environment fit — it is not an admissions likelihood estimate and does not use admissions data.
+- **Live course data** reflects the current or upcoming term; historical schedules may not be available.
+- **Degree requirements** are curated for 344 major programs across 28 disciplines — not every program at every school is covered.
+- **Faculty profiles** are indexed where institutional directory data is accessible; coverage varies by school.
+- Open Campus Advisor does not store or process student academic transcripts, GPA, test scores, or admissions decisions.
 
 ## Contact
 

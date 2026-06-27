@@ -83,9 +83,14 @@ export default function Privacy() {
 
       </div>
 
-      <footer className="border-t border-gray-100 pt-8 flex items-center justify-between text-sm text-gray-400">
-        <Link href="/" className="hover:text-gray-600 transition-colors">← Back to Open Campus Advisor</Link>
-        <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms of Service</Link>
+      <footer className="border-t border-gray-100 pt-8 space-y-3">
+        <div className="flex items-center justify-between text-sm text-gray-400">
+          <Link href="/" className="hover:text-gray-600 transition-colors">← Back to Open Campus Advisor</Link>
+          <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms of Service</Link>
+        </div>
+        <p className="text-xs text-gray-400 leading-relaxed">
+          Open Campus Advisor is an independent educational platform and is not affiliated with, endorsed by, or sponsored by any college, university, or institution unless explicitly stated.
+        </p>
       </footer>
 
     </main>

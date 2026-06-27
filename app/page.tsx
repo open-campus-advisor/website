@@ -9,6 +9,19 @@ export const metadata: Metadata = {
 };
 
 const EXAMPLES = [
+  // Planning & fit — new capabilities, lead with them
+  {
+    q: "I scored 5 on AP Calculus BC and 4 on AP Chemistry — how much credit do I get at MIT?",
+    category: "Planning & fit",
+  },
+  {
+    q: "Which of these schools is the best academic fit for my background in environmental science?",
+    category: "Planning & fit",
+  },
+  {
+    q: "Map out my next 3 semesters as a sophomore CS major at Cornell.",
+    category: "Planning & fit",
+  },
   // Path & career — the most differentiated, lead with it
   {
     q: "I want to work in climate policy — which of these schools is strongest for that path?",
@@ -75,9 +88,14 @@ const CAPABILITIES = [
     examples: ["What courses do I need for the CS major at Brown?", "How do MIT and Stanford differ in their CS requirements?"],
   },
   {
-    title: "Academic paths & career outcomes",
-    description: "Navigate from a career goal backwards to majors, courses, and professors — or forward from a major to see where it leads. Salary ranges, job outlook, named internship programs, and NSF-funded summer research opportunities grounded in real data.",
-    examples: ["What major and courses lead to climate policy work?", "What does a machine learning engineer actually earn?"],
+    title: "Academic paths, fit scoring & multi-term planning",
+    description: "Navigate from a career goal backwards to majors, courses, and professors — or forward from a major to see where it leads. Score your academic profile against a school's curriculum to find genuine academic fit (not admissions likelihood). Generate a multi-semester course sequence from your major and completed coursework. Salary ranges, job outlook, and NSF-funded summer research grounded in real data.",
+    examples: ["What major and courses lead to climate policy work?", "Which school's CS curriculum fits my background best?", "Map out my next 4 semesters as a junior Environmental Studies major."],
+  },
+  {
+    title: "AP/IB credit articulation",
+    description: "See exactly which AP and IB exam scores earn credit at specific schools, which requirements they satisfy, and how much of a head start you already have before day one. Know your credit picture before you commit — pilot coverage at Yale, MIT, Columbia, Brown, and Stanford.",
+    examples: ["I scored 5 on AP Calc BC — what credit does that earn at MIT?", "How many gen-ed requirements can I skip at Yale with my IB scores?"],
   },
 ];
 
@@ -205,7 +223,7 @@ export default function Home() {
       <section className="space-y-8">
         <h2 className="text-2xl font-semibold">What students ask</h2>
         <div className="space-y-6">
-          {(["Path & career", "Academics", "Research"] as const).map(category => (
+          {(["Planning & fit", "Path & career", "Academics", "Research"] as const).map(category => (
             <div key={category} className="space-y-3">
               <p className="text-xs font-medium uppercase tracking-widest text-gray-400">{category}</p>
               <div className="grid gap-2">
@@ -265,13 +283,18 @@ export default function Home() {
           <div className="border border-gray-100 rounded-xl p-6 space-y-3">
             <p className="text-xs font-medium uppercase tracking-widest text-gray-400">For platforms</p>
             <p className="text-sm text-gray-500 leading-relaxed">
-              If your platform already owns the student relationship — Scoir, Naviance, College Board, a counseling tool — you don&apos;t need to build the data layer. Ours is live across dozens of top US colleges and universities.
+              If your platform already owns the student relationship — Scoir, Naviance, College Board, a counseling tool — you don&apos;t need to build the academic data layer. OCA is the academic intelligence layer, not the admissions-data layer.
             </p>
             <p className="text-sm text-gray-500 leading-relaxed">
-              Three endpoints. Your product, our data.
+              Answer the questions your current stack can&apos;t:
             </p>
+            <ul className="space-y-1 text-xs text-gray-500">
+              <li className="flex items-start gap-2"><span className="text-gray-300 mt-0.5">›</span>Which schools are academically strong fits for this student?</li>
+              <li className="flex items-start gap-2"><span className="text-gray-300 mt-0.5">›</span>How much AP/IB credit head start does this student have?</li>
+              <li className="flex items-start gap-2"><span className="text-gray-300 mt-0.5">›</span>What should this student take over the next few terms?</li>
+            </ul>
             <div className="pt-1 space-y-2">
-              <pre className="bg-gray-50 text-gray-600 text-xs px-3 py-2 rounded-lg leading-relaxed">POST /api/v1/batch/path{"\n"}x-institution-id: your-platform</pre>
+              <pre className="bg-gray-50 text-gray-600 text-xs px-3 py-2 rounded-lg leading-relaxed">POST /api/v1/fit{"\n"}POST /api/v1/credit-articulation{"\n"}POST /api/v1/plan</pre>
               <Link
                 href="/integrate"
                 className="inline-block text-sm text-gray-900 underline hover:no-underline"
@@ -285,13 +308,18 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 pt-8 flex items-center justify-between text-sm text-gray-400">
-        <span>© 2026 Open Campus Advisor</span>
-        <div className="flex gap-6">
-          <Link href="mailto:hello@opencampusadvisor.org" className="hover:text-gray-600 transition-colors">Contact</Link>
-          <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
-          <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
+      <footer className="border-t border-gray-100 pt-8 space-y-3">
+        <div className="flex items-center justify-between text-sm text-gray-400">
+          <span>© 2026 Open Campus Advisor</span>
+          <div className="flex gap-6">
+            <Link href="mailto:hello@opencampusadvisor.org" className="hover:text-gray-600 transition-colors">Contact</Link>
+            <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
+            <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
+          </div>
         </div>
+        <p className="text-xs text-gray-400 leading-relaxed">
+          Open Campus Advisor is an independent educational platform and is not affiliated with, endorsed by, or sponsored by any college, university, or institution unless explicitly stated.
+        </p>
       </footer>
 
     </main>

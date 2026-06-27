@@ -17,6 +17,13 @@ export default function Terms() {
       <div className="space-y-8 text-gray-600 leading-relaxed">
 
         <section className="space-y-3">
+          <h2 className="text-lg font-semibold text-gray-900">Independent platform</h2>
+          <p>
+            Open Campus Advisor is an independent educational platform and is not affiliated with, endorsed by, or sponsored by any college, university, or institution unless explicitly stated.
+          </p>
+        </section>
+
+        <section className="space-y-3">
           <h2 className="text-lg font-semibold text-gray-900">Information service, not professional advice</h2>
           <p>
             Open Campus Advisor provides academic information and data-based guidance. It is <strong>not a substitute for advice from a licensed educational counselor, academic advisor, or career professional.</strong>
@@ -99,8 +106,11 @@ export default function Terms() {
 
       </div>
 
-      <footer className="border-t border-gray-100 pt-8 text-sm text-gray-400">
+      <footer className="border-t border-gray-100 pt-8 space-y-3 text-sm text-gray-400">
         <Link href="/" className="hover:text-gray-600 transition-colors">← Back to Open Campus Advisor</Link>
+        <p className="text-xs leading-relaxed">
+          Open Campus Advisor is an independent educational platform and is not affiliated with, endorsed by, or sponsored by any college, university, or institution unless explicitly stated.
+        </p>
       </footer>
 
     </main>

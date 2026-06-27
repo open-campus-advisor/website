@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Integration — REST API & MCP Agentic Tools | Open Campus Advisor",
   description:
-    "Two integration surfaces: a REST API for platforms that already serve students, and a hosted remote MCP server for agentic AI workflows in Claude.ai, Claude Desktop, and Claude Code. 21 tools, session-scoped student context, live data across 125+ US colleges.",
+    "REST API and hosted MCP server for platforms that serve students. Academic fit scoring, AP/IB credit articulation, multi-term planning, live course catalogs, faculty research, and career outcomes across 125+ US colleges. OCA is the academic intelligence layer.",
   alternates: { canonical: "https://opencampusadvisor.org/integrate" },
 };
 
@@ -27,6 +27,9 @@ const DATA_LAYERS = [
   { label: "Career outcome data", detail: "62 career pathways across 11 tracks with BLS salary ranges, 10-year outlook projections, skill requirements, RIASEC interest mapping, named internship programs, and live NSF REU summer research opportunities" },
   { label: "Cross-institutional comparison", detail: "Rank institutions by academic strength in any subject area — courses, faculty concentration, and research activity" },
   { label: "Personalized student enrichment", detail: "Filter completed coursework, rank results by stated goals, surface constraint risks, and generate individualized next-semester recommendations" },
+  { label: "Academic fit scoring", detail: "Score a student's academic profile against any school — course overlap, major alignment, learning environment fit, and research opportunity match. Academic fit, not admissions likelihood." },
+  { label: "AP/IB credit articulation", detail: "Which AP and IB exam scores earn credit at specific schools, which requirements they satisfy, and how much of a head start a student has before day one. Pilot coverage: Yale, MIT, Columbia, Brown, Stanford." },
+  { label: "Multi-term academic planning", detail: "Graph-backed course sequence recommendation from a declared major and completed coursework — covering 2–4 terms. Not a registrar-grade degree audit; a smart planning layer grounded in real major requirements." },
 ];
 
 const PATTERNS = [
@@ -77,6 +80,66 @@ POST /api/v1/path
 { "goal": "...", "student_context": { ... } }
 // → ranked institutions, verified courses, active faculty`,
   },
+  {
+    number: "04",
+    title: "Academic fit scoring",
+    description:
+      "A student is evaluating schools. Your platform calls /api/v1/fit with the student's academic profile and a list of target schools. The response scores each school across course overlap, major alignment, learning environment, and research opportunity — giving counselors an academic-fit signal that complements admissions data without conflating the two.",
+    code: `POST /api/v1/fit
+x-institution-id: your-platform
+{
+  "schools": "yale,mit,stanford,brown",
+  "student_context": {
+    "major": "Computer Science",
+    "completed_courses": ["CS101", "MATH201"],
+    "career_targets": ["machine learning engineer"],
+    "interests": ["AI", "systems"]
+  }
+}
+// → per-school fit scores + dimension breakdown
+// academic fit ≠ admissions likelihood`,
+  },
+  {
+    number: "05",
+    title: "AP/IB credit head start",
+    description:
+      "Before a student commits to a school, your platform surfaces their credit picture. Call /api/v1/credit-articulation with the student's standardized test scores. The response shows exactly which credits each school grants, which requirements are satisfied, and how many required courses they can skip — a concrete head start signal that drives real enrollment decisions.",
+    code: `POST /api/v1/credit-articulation
+x-institution-id: your-platform
+{
+  "school": "mit",
+  "student_context": {
+    "standardized_credits": [
+      { "exam_type": "AP", "subject": "Calculus BC", "score": 5 },
+      { "exam_type": "AP", "subject": "Chemistry", "score": 4 },
+      { "exam_type": "IB", "subject": "Physics HL", "score": 6 }
+    ]
+  }
+}
+// → credits granted, requirements satisfied, semesters saved
+// pilot schools: yale · mit · columbia · brown · stanford`,
+  },
+  {
+    number: "06",
+    title: "Multi-term academic planning",
+    description:
+      "A student has declared a major and completed several courses. Your platform calls /api/v1/plan to generate a recommended course sequence for the next 2–4 semesters — grounded in graph_major_course edges, prerequisite chains, and career target alignment. Not a registrar-grade degree audit; a smart recommendation layer that gives counselors a structured starting point.",
+    code: `POST /api/v1/plan
+x-institution-id: your-platform
+{
+  "school": "brown",
+  "major": "computer-science",
+  "terms": 3,
+  "student_context": {
+    "year": "sophomore",
+    "completed_courses": ["CSCI0150", "CSCI0200", "MATH0100"],
+    "career_targets": ["software engineer"]
+  }
+}
+// → term-by-term recommended course sequences
+// respects prerequisites · removes completed courses
+// NOT a degree audit — a planning recommendation`,
+  },
 ];
 
 export default function Integrate() {
@@ -98,10 +161,10 @@ export default function Integrate() {
           <span className="text-gray-400 font-light">REST API and MCP server.</span>
         </h1>
         <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
-          Two integration surfaces. A <strong className="text-gray-700">REST API</strong> for platforms that already serve students — providing live course catalogs, faculty research, degree requirements, and career outcomes across 125+ institutions. A hosted <strong className="text-gray-700">remote MCP server</strong> for agentic AI workflows in Claude.ai, Claude Desktop, and Claude Code — 21 tools, session-scoped student context, OAuth profile auto-load, no installation required.
+          Two integration surfaces. A <strong className="text-gray-700">REST API</strong> for platforms that already serve students — live course catalogs, faculty research, degree requirements, career outcomes, <strong className="text-gray-700">academic fit scoring</strong>, <strong className="text-gray-700">AP/IB credit articulation</strong>, and <strong className="text-gray-700">multi-term planning</strong> across 125+ institutions. A hosted <strong className="text-gray-700">remote MCP server</strong> for agentic AI workflows in Claude.ai, Claude Desktop, and Claude Code — 21 tools, session-scoped student context, OAuth profile auto-load, no installation required.
         </p>
         <p className="text-lg text-gray-500 max-w-2xl leading-relaxed">
-          Your product surface. Your student relationship. Our data infrastructure.
+          OCA is the academic intelligence layer. Your platform owns the student relationship, the product surface, and the admissions data. We own what happens academically — curriculum, faculty, requirements, and planning.
         </p>
         <div className="flex items-center gap-4 pt-2">
           <Link
@@ -123,8 +186,41 @@ export default function Integrate() {
       {/* The pitch */}
       <section className="space-y-6 border-l-2 border-gray-100 pl-6">
         <p className="text-gray-900 font-medium text-lg leading-relaxed">
-          Building and maintaining live academic data infrastructure across hundreds of institutions — sourcing from registration systems, parsing catalog formats, managing Cloudflare bypass, keeping degree requirements current — is an 18-month engineering investment before you ship a single feature. We have already built it. Integration is a contract and three API endpoints.
+          Building and maintaining live academic data infrastructure across hundreds of institutions — sourcing from registration systems, parsing catalog formats, managing Cloudflare bypass, keeping degree requirements current — is an 18-month engineering investment before you ship a single feature. We have already built it. Integration is a contract and an API key.
         </p>
+      </section>
+
+      {/* Three questions */}
+      <section className="space-y-6">
+        <div>
+          <h2 className="text-2xl font-semibold">Three questions your platform can now answer</h2>
+          <p className="text-gray-500 mt-2 max-w-2xl">The new REST endpoints unlock the academic intelligence layer that complements your admissions and counseling data — without overlap.</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            {
+              q: "Which schools are academically strong fits for this student?",
+              endpoint: "POST /api/v1/fit",
+              note: "Academic fit, not admissions likelihood. Scores curriculum overlap, major alignment, learning environment, and research opportunity match.",
+            },
+            {
+              q: "How much AP/IB credit head start does this student have?",
+              endpoint: "POST /api/v1/credit-articulation",
+              note: "Exact credits granted per school, requirements satisfied, and semesters potentially saved. Pilot: Yale, MIT, Columbia, Brown, Stanford.",
+            },
+            {
+              q: "What should this student take over the next few terms?",
+              endpoint: "POST /api/v1/plan",
+              note: "Graph-backed multi-term course sequence from declared major and completed coursework. Not a degree audit — a smart planning recommendation.",
+            },
+          ].map((item) => (
+            <div key={item.endpoint} className="border border-gray-100 rounded-xl p-5 space-y-3">
+              <p className="font-medium text-gray-900 text-sm leading-snug">&ldquo;{item.q}&rdquo;</p>
+              <p className="text-xs font-mono text-gray-400">{item.endpoint}</p>
+              <p className="text-xs text-gray-500 leading-relaxed">{item.note}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* What's in the graph */}
@@ -287,9 +383,11 @@ get_student_context()
                 "Live course catalog data across 125+ institutions",
                 "Faculty research profiles, OpenAlex publications, and NIH grant records",
                 "Curated degree requirements and career outcome data",
+                "Academic fit scoring — curriculum and major alignment signals",
+                "AP/IB credit articulation for 5 schools (pilot, expanding)",
+                "Multi-term planning grounded in real major requirements",
                 "Data sourcing, parsing, maintenance, and uptime",
                 "Ongoing institutional coverage expansion toward 400 schools",
-                "Data freshness and quality assurance",
               ].map((i) => (
                 <li key={i} className="flex items-start gap-2"><span className="text-gray-300">›</span>{i}</li>
               ))}
@@ -336,7 +434,7 @@ get_student_context()
             <p className="text-xs font-medium uppercase tracking-widest text-gray-400">Rate limits</p>
             <p className="font-medium text-gray-900 text-sm">300 requests / minute per API key</p>
             <p className="text-xs text-gray-500 leading-relaxed">
-              Cross-school endpoints (<code className="bg-gray-100 px-1 rounded">/search</code>, <code className="bg-gray-100 px-1 rounded">/faculty/search</code>, <code className="bg-gray-100 px-1 rounded">/path</code>) count as one request regardless of how many schools are queried. The batch endpoint processes up to 20 goal queries per request. Sustained higher limits available for enterprise contracts.
+              Cross-school endpoints (<code className="bg-gray-100 px-1 rounded">/search</code>, <code className="bg-gray-100 px-1 rounded">/path</code>, <code className="bg-gray-100 px-1 rounded">/fit</code>) count as one request regardless of how many schools are queried. <code className="bg-gray-100 px-1 rounded">/batch/path</code> processes up to 20 queries per request. <code className="bg-gray-100 px-1 rounded">/credit-articulation</code> and <code className="bg-gray-100 px-1 rounded">/plan</code> count as single requests. Sustained higher limits available for enterprise contracts.
             </p>
           </div>
 
@@ -418,12 +516,17 @@ get_student_context()
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 pt-8 flex items-center justify-between text-sm text-gray-400">
-        <Link href="/" className="hover:text-gray-600 transition-colors">← Open Campus Advisor</Link>
-        <div className="flex gap-6">
-          <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
-          <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
+      <footer className="border-t border-gray-100 pt-8 space-y-3">
+        <div className="flex items-center justify-between text-sm text-gray-400">
+          <Link href="/" className="hover:text-gray-600 transition-colors">← Open Campus Advisor</Link>
+          <div className="flex gap-6">
+            <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
+            <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
+          </div>
         </div>
+        <p className="text-xs text-gray-400 leading-relaxed">
+          Open Campus Advisor is an independent educational platform and is not affiliated with, endorsed by, or sponsored by any college, university, or institution unless explicitly stated.
+        </p>
       </footer>
 
     </main>

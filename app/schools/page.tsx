@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SCHOOLS, SCHOOL_TYPE_ORDER } from "../../lib/schools";
 
+const BASE = "https://opencampusadvisor.org";
+
 export const metadata: Metadata = {
   title: "125+ Colleges & Universities — Live Course Data",
   description:
@@ -26,9 +28,36 @@ const orderedTypes = [
   ...Object.keys(byType).filter(t => !SCHOOL_TYPE_ORDER.includes(t)),
 ];
 
+const itemListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "US Colleges and Universities on Open Campus Advisor",
+  description: "125+ US colleges and universities with live course catalogs, faculty research profiles, and degree requirements indexed by Open Campus Advisor.",
+  numberOfItems: Object.keys(SCHOOLS).length,
+  itemListElement: Object.entries(SCHOOLS).map(([slug, meta], index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: meta.name,
+    url: `${BASE}/schools/${slug}`,
+    item: {
+      "@type": "CollegeOrUniversity",
+      name: meta.name,
+      additionalType: meta.type,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: meta.location.split(",")[0],
+        addressRegion: meta.location.split(",")[1]?.trim(),
+      },
+      url: `${BASE}/schools/${slug}`,
+    },
+  })),
+};
+
 export default function SchoolsPage() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 space-y-16">
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
 
       {/* Nav */}
       <div>
