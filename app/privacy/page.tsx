@@ -10,7 +10,7 @@ export default function Privacy() {
 
       <div className="space-y-2">
         <h1 className="text-3xl font-bold">Privacy Policy</h1>
-        <p className="text-gray-400 text-sm">Effective date: June 7, 2026</p>
+        <p className="text-gray-400 text-sm">Effective date: June 29, 2026</p>
       </div>
 
       <div className="space-y-8 text-gray-600 leading-relaxed">
@@ -37,10 +37,17 @@ export default function Privacy() {
             to understand aggregate usage patterns.
           </p>
           <p>
-            Analytics are processed by{" "}
+            API usage analytics are processed by{" "}
             <a href="https://posthog.com" target="_blank" className="text-blue-600 hover:underline">PostHog</a>.
             When using the MCP server locally via Claude Desktop or Claude Code, no data is sent
             to our servers — requests go directly from your machine to the institution's public catalog.
+          </p>
+          <p>
+            This website (opencampusadvisor.org) uses{" "}
+            <a href="https://marketingplatform.google.com/about/analytics/" target="_blank" className="text-blue-600 hover:underline">Google Analytics 4</a>{" "}
+            to measure aggregate page traffic. Google Analytics collects anonymized usage data
+            including pages visited and approximate location (country/region). No personally
+            identifiable information is sent.
           </p>
         </section>
 
@@ -66,8 +73,11 @@ export default function Privacy() {
         <section className="space-y-3">
           <h2 className="text-lg font-semibold text-gray-900">Cookies</h2>
           <p>
-            This website (opencampusadvisor.org) does not use cookies. The API
-            (api.opencampusadvisor.org) does not set cookies on your browser.
+            This website uses cookies set by Google Analytics (<code className="text-sm bg-gray-100 px-1 rounded">_ga</code>,{" "}
+            <code className="text-sm bg-gray-100 px-1 rounded">_ga_*</code>) to distinguish unique visitors and
+            measure aggregate traffic. These cookies contain a randomly generated identifier — no
+            personal data — and expire after 2 years. The API (api.opencampusadvisor.org) does
+            not set cookies on your browser.
           </p>
         </section>
 

@@ -1,6 +1,11 @@
 import type { MetadataRoute } from "next";
-import { ALL_SLUGS } from "../lib/schools";
+import { ALL_SLUGS, SCHOOLS } from "../lib/schools";
 import { COMPARE_PAIRS, pairId } from "../lib/compare-pairs";
+
+function schoolHasRichData(slug: string): boolean {
+  const m = SCHOOLS[slug];
+  return !!(m && (m.strengths?.length || m.signatureMajors?.length));
+}
 
 const BASE = "https://opencampusadvisor.org";
 
@@ -24,12 +29,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const compare_pages: MetadataRoute.Sitemap = COMPARE_PAIRS.map(p => ({
-    url: `${BASE}/compare/${pairId(p.slug1, p.slug2)}`,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.65,
-  }));
+  const compare_pages: MetadataRoute.Sitemap = COMPARE_PAIRS
+    .filter(p => schoolHasRichData(p.slug1) && schoolHasRichData(p.slug2))
+    .map(p => ({
+      url: `${BASE}/compare/${pairId(p.slug1, p.slug2)}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.65,
+    }));
 
   return [...static_pages, ...school_pages, ...compare_pages];
 }

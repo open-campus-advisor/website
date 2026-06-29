@@ -8,10 +8,20 @@ import { COMPARE_PAIRS, parsePairId, pairId, comparePairsForSchool } from "../..
 const BASE = "https://opencampusadvisor.org";
 const CHATGPT_URL = "https://chatgpt.com/g/g-6a2583a8a7cc819198378184eaf9b15f-open-campus-advisor";
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return COMPARE_PAIRS.map(p => ({ pair: pairId(p.slug1, p.slug2) }));
+  return COMPARE_PAIRS
+    .filter(p => {
+      const m1 = SCHOOLS[p.slug1];
+      const m2 = SCHOOLS[p.slug2];
+      return (
+        m1 && m2 &&
+        (m1.strengths?.length || m1.signatureMajors?.length) &&
+        (m2.strengths?.length || m2.signatureMajors?.length)
+      );
+    })
+    .map(p => ({ pair: pairId(p.slug1, p.slug2) }));
 }
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
